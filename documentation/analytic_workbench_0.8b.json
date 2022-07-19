@@ -1,1 +1,522 @@
-{"openapi":"3.0.2","info":{"title":"IHelp Model Manager","version":"0.8b","description":"A execution tool for models","termsOfService":"","contact":{"name":"ICE ","url":"https://informationcatalyst.com/","email":""},"license":{"name":"","url":""}},"paths":{"/token":{"post":{"summary":"Login For Access Token","description":"dataForDebug[\"function\"]=\"login_for_access_token()\"\nstringDebug=\"[OWNLOGS]:\"+dataForDebug['filename']+\":\"+dataForDebug['function']\nlogger.debug(stringDebug+\" --> ENTERING\")\n#user = authenticate_user(fake_users_db, form_data.username, form_data.password)\nif not user:\n    raise HTTPException(\n        status_code=status.HTTP_401_UNAUTHORIZED,\n        detail=\"Incorrect username or password\",\n        headers={\"WWW-Authenticate\": \"Bearer\"},\n    )\naccess_token_expires = timedelta(minutes=EXPIRE_TOKEN)\naccess_token = create_access_token(\n    data={\"sub\": user.username}, expires_delta=access_token_expires\n)\nlogger.debug(stringDebug+\" --> EXITING\")\nreturn {\"access_token\": access_token, \"token_type\": \"bearer\"}","operationId":"login_for_access_token_token_post","requestBody":{"content":{"application/x-www-form-urlencoded":{"schema":{"$ref":"#/components/schemas/Body_login_for_access_token_token_post"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Token"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/listModels":{"get":{"summary":"Listmodels","operationId":"listModels_listModels_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/listModels/{modelName}":{"get":{"summary":"Listmodelsbyname","operationId":"listModelsByName_listModels__modelName__get","parameters":[{"required":true,"schema":{"title":"Modelname","type":"string"},"name":"modelName","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/getAlgorithm/{modelId}":{"get":{"summary":"Getalgorithm","description":"Returns the algorithm which the model has been trained. ","operationId":"getAlgorithm_getAlgorithm__modelId__get","parameters":[{"required":true,"schema":{"title":"Modelid","type":"string"},"name":"modelId","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/getListModel/{modelId}":{"get":{"summary":"Getmodels","description":"Returns the prediction columns needed for a model specified by filename","operationId":"getmodels_getListModel__modelId__get","parameters":[{"required":true,"schema":{"title":"Modelid","type":"string"},"name":"modelId","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/getModelBirch/{modelName}/{userName}":{"get":{"summary":"Getmodelbirch","operationId":"getModelBirch_getModelBirch__modelName___userName__get","parameters":[{"required":true,"schema":{"title":"Modelname","type":"string"},"name":"modelName","in":"path"},{"required":true,"schema":{"title":"Username","type":"string"},"name":"userName","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/getModelSklearnKmean/{modelName}/{userName}":{"get":{"summary":"Getmodelsklearnkmean","operationId":"getModelSklearnKmean_getModelSklearnKmean__modelName___userName__get","parameters":[{"required":true,"schema":{"title":"Modelname","type":"string"},"name":"modelName","in":"path"},{"required":true,"schema":{"title":"Username","type":"string"},"name":"userName","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/getModelWard/{modelName}/{userName}":{"get":{"summary":"Getmodelward","operationId":"getModelWard_getModelWard__modelName___userName__get","parameters":[{"required":true,"schema":{"title":"Modelname","type":"string"},"name":"modelName","in":"path"},{"required":true,"schema":{"title":"Username","type":"string"},"name":"userName","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/getModelH2OKmean/{modelName}/{userName}/{predictors}":{"get":{"summary":"Getmodelh2Okmean","operationId":"getModelH2OKmean_getModelH2OKmean__modelName___userName___predictors__get","parameters":[{"required":true,"schema":{"title":"Modelname","type":"string"},"name":"modelName","in":"path"},{"required":true,"schema":{"title":"Username","type":"string"},"name":"userName","in":"path"},{"required":true,"schema":{"title":"Predictors","type":"string"},"name":"predictors","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/dryicelink/{executionId}/{link}":{"get":{"summary":"Dryicelink","description":"Updates the execution id row with the data of the link passed as param","operationId":"dryicelink_dryicelink__executionId___link__get","parameters":[{"required":true,"schema":{"title":"Link","type":"string"},"name":"link","in":"path"},{"required":true,"schema":{"title":"Executionid","type":"integer"},"name":"executionId","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/executeModel/{modelId}/{patientData}":{"get":{"summary":"Executemodel","description":"Executes the model called 'modelName' with the data sent into 'patientData'","operationId":"executeModel_executeModel__modelId___patientData__get","parameters":[{"required":true,"schema":{"title":"Modelid","type":"string"},"name":"modelId","in":"path"},{"required":true,"schema":{"title":"Patientdata","type":"string"},"name":"patientData","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/deleteModel/{modelId}":{"get":{"summary":"Deletemodel","operationId":"deleteModel_deleteModel__modelId__get","parameters":[{"required":true,"schema":{"title":"Modelid","type":"string"},"name":"modelId","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/uploadFiles":{"post":{"summary":"Uploadfiles","description":"Uploads a file (zip or tar) whith the resources to create a new Model.\n\nThe files into the compressed file should have the following structure:\n\n        - [modelName] (Folder)\n        |- experimental (folder)\n        |  |- [modelName]_informationColumnsStringToNumber.json (file with information regarding the model)\n        |- [modelName].pkl (file with the pickle containing the trained model)\n\nFrom this (30/5/2022) i've to make modifications, no is a good option to create a folder with the name of the uploaded file\nthus --> i'm going to integrate a database to manage the models uploaded and working. In this case, the folder will be the id value\nof the inserted model into database. ","operationId":"uploadFiles_uploadFiles_post","requestBody":{"content":{"multipart/form-data":{"schema":{"$ref":"#/components/schemas/Body_uploadFiles_uploadFiles_post"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/pruebaRaw/{modelName}":{"get":{"summary":"Pruebaraw","operationId":"pruebaRaw_pruebaRaw__modelName__get","parameters":[{"required":true,"schema":{"title":"Modelname"},"name":"modelName","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/pruebaNorm/{modelName}":{"get":{"summary":"Pruebanorm","operationId":"pruebaNorm_pruebaNorm__modelName__get","parameters":[{"required":true,"schema":{"title":"Modelname"},"name":"modelName","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}}},"components":{"schemas":{"Body_login_for_access_token_token_post":{"title":"Body_login_for_access_token_token_post","required":["username","password"],"type":"object","properties":{"grant_type":{"title":"Grant Type","pattern":"password","type":"string"},"username":{"title":"Username","type":"string"},"password":{"title":"Password","type":"string"},"scope":{"title":"Scope","type":"string","default":""},"client_id":{"title":"Client Id","type":"string"},"client_secret":{"title":"Client Secret","type":"string"}}},"Body_uploadFiles_uploadFiles_post":{"title":"Body_uploadFiles_uploadFiles_post","required":["file"],"type":"object","properties":{"file":{"title":"File","type":"string","format":"binary"}}},"HTTPValidationError":{"title":"HTTPValidationError","type":"object","properties":{"detail":{"title":"Detail","type":"array","items":{"$ref":"#/components/schemas/ValidationError"}}}},"Token":{"title":"Token","required":["access_token","token_type"],"type":"object","properties":{"access_token":{"title":"Access Token","type":"string"},"token_type":{"title":"Token Type","type":"string"}}},"ValidationError":{"title":"ValidationError","required":["loc","msg","type"],"type":"object","properties":{"loc":{"title":"Location","type":"array","items":{"type":"string"}},"msg":{"title":"Message","type":"string"},"type":{"title":"Error Type","type":"string"}}}}}}
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "IHelp Model Manager",
+        "version": "0.8b",
+        "description": "A execution tool for models",
+        "termsOfService": "",
+        "contact": {
+            "name": "ICE ",
+            "url": "https://informationcatalyst.com/",
+            "email": ""
+        },
+        "license": { "name": "", "url": "" }
+    },
+    "paths": {
+        "/token": {
+            "post": {
+                "summary": "Login For Access Token",
+                "description": "dataForDebug[\"function\"]=\"login_for_access_token()\"\nstringDebug=\"[OWNLOGS]:\"+dataForDebug['filename']+\":\"+dataForDebug['function']\nlogger.debug(stringDebug+\" --> ENTERING\")\n#user = authenticate_user(fake_users_db, form_data.username, form_data.password)\nif not user:\n    raise HTTPException(\n        status_code=status.HTTP_401_UNAUTHORIZED,\n        detail=\"Incorrect username or password\",\n        headers={\"WWW-Authenticate\": \"Bearer\"},\n    )\naccess_token_expires = timedelta(minutes=EXPIRE_TOKEN)\naccess_token = create_access_token(\n    data={\"sub\": user.username}, expires_delta=access_token_expires\n)\nlogger.debug(stringDebug+\" --> EXITING\")\nreturn {\"access_token\": access_token, \"token_type\": \"bearer\"}",
+                "operationId": "login_for_access_token_token_post",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Body_login_for_access_token_token_post"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/Token" }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/listModels": {
+            "get": {
+                "summary": "Listmodels",
+                "operationId": "listModels_listModels_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    }
+                }
+            }
+        },
+        "/listModels/{modelName}": {
+            "get": {
+                "summary": "Listmodelsbyname",
+                "operationId": "listModelsByName_listModels__modelName__get",
+                "parameters": [{
+                    "required": true,
+                    "schema": { "title": "Modelname", "type": "string" },
+                    "name": "modelName",
+                    "in": "path"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/getAlgorithm/{modelId}": {
+            "get": {
+                "summary": "Getalgorithm",
+                "description": "Returns the algorithm which the model has been trained. ",
+                "operationId": "getAlgorithm_getAlgorithm__modelId__get",
+                "parameters": [{
+                    "required": true,
+                    "schema": { "title": "Modelid", "type": "string" },
+                    "name": "modelId",
+                    "in": "path"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/getListModel/{modelId}": {
+            "get": {
+                "summary": "Getmodels",
+                "description": "Returns the prediction columns needed for a model specified by filename",
+                "operationId": "getmodels_getListModel__modelId__get",
+                "parameters": [{
+                    "required": true,
+                    "schema": { "title": "Modelid", "type": "string" },
+                    "name": "modelId",
+                    "in": "path"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/getModelBirch/{modelName}/{userName}": {
+            "get": {
+                "summary": "Getmodelbirch",
+                "operationId": "getModelBirch_getModelBirch__modelName___userName__get",
+                "parameters": [{
+                        "required": true,
+                        "schema": { "title": "Modelname", "type": "string" },
+                        "name": "modelName",
+                        "in": "path"
+                    },
+                    {
+                        "required": true,
+                        "schema": { "title": "Username", "type": "string" },
+                        "name": "userName",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/getModelSklearnKmean/{modelName}/{userName}": {
+            "get": {
+                "summary": "Getmodelsklearnkmean",
+                "operationId": "getModelSklearnKmean_getModelSklearnKmean__modelName___userName__get",
+                "parameters": [{
+                        "required": true,
+                        "schema": { "title": "Modelname", "type": "string" },
+                        "name": "modelName",
+                        "in": "path"
+                    },
+                    {
+                        "required": true,
+                        "schema": { "title": "Username", "type": "string" },
+                        "name": "userName",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/getModelWard/{modelName}/{userName}": {
+            "get": {
+                "summary": "Getmodelward",
+                "operationId": "getModelWard_getModelWard__modelName___userName__get",
+                "parameters": [{
+                        "required": true,
+                        "schema": { "title": "Modelname", "type": "string" },
+                        "name": "modelName",
+                        "in": "path"
+                    },
+                    {
+                        "required": true,
+                        "schema": { "title": "Username", "type": "string" },
+                        "name": "userName",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/getModelH2OKmean/{modelName}/{userName}/{predictors}": {
+            "get": {
+                "summary": "Getmodelh2Okmean",
+                "operationId": "getModelH2OKmean_getModelH2OKmean__modelName___userName___predictors__get",
+                "parameters": [{
+                        "required": true,
+                        "schema": { "title": "Modelname", "type": "string" },
+                        "name": "modelName",
+                        "in": "path"
+                    },
+                    {
+                        "required": true,
+                        "schema": { "title": "Username", "type": "string" },
+                        "name": "userName",
+                        "in": "path"
+                    },
+                    {
+                        "required": true,
+                        "schema": { "title": "Predictors", "type": "string" },
+                        "name": "predictors",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/dryicelink/{executionId}/{link}": {
+            "get": {
+                "summary": "Dryicelink",
+                "description": "Updates the execution id row with the data of the link passed as param",
+                "operationId": "dryicelink_dryicelink__executionId___link__get",
+                "parameters": [{
+                        "required": true,
+                        "schema": { "title": "Link", "type": "string" },
+                        "name": "link",
+                        "in": "path"
+                    },
+                    {
+                        "required": true,
+                        "schema": { "title": "Executionid", "type": "integer" },
+                        "name": "executionId",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/executeModel/{modelId}/{patientData}": {
+            "get": {
+                "summary": "Executemodel",
+                "description": "Executes the model called 'modelName' with the data sent into 'patientData'",
+                "operationId": "executeModel_executeModel__modelId___patientData__get",
+                "parameters": [{
+                        "required": true,
+                        "schema": { "title": "Modelid", "type": "string" },
+                        "name": "modelId",
+                        "in": "path"
+                    },
+                    {
+                        "required": true,
+                        "schema": { "title": "Patientdata", "type": "string" },
+                        "name": "patientData",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deleteModel/{modelId}": {
+            "get": {
+                "summary": "Deletemodel",
+                "operationId": "deleteModel_deleteModel__modelId__get",
+                "parameters": [{
+                    "required": true,
+                    "schema": { "title": "Modelid", "type": "string" },
+                    "name": "modelId",
+                    "in": "path"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/uploadFiles": {
+            "post": {
+                "summary": "Uploadfiles",
+                "description": "Uploads a file (zip or tar) whith the resources to create a new Model.\n\nThe files into the compressed file should have the following structure:\n\n        - [modelName] (Folder)\n        |- experimental (folder)\n        |  |- [modelName]_informationColumnsStringToNumber.json (file with information regarding the model)\n        |- [modelName].pkl (file with the pickle containing the trained model)\n\nFrom this (30/5/2022) i've to make modifications, no is a good option to create a folder with the name of the uploaded file\nthus --> i'm going to integrate a database to manage the models uploaded and working. In this case, the folder will be the id value\nof the inserted model into database. ",
+                "operationId": "uploadFiles_uploadFiles_post",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Body_uploadFiles_uploadFiles_post"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pruebaRaw/{modelName}": {
+            "get": {
+                "summary": "Pruebaraw",
+                "operationId": "pruebaRaw_pruebaRaw__modelName__get",
+                "parameters": [{
+                    "required": true,
+                    "schema": { "title": "Modelname" },
+                    "name": "modelName",
+                    "in": "path"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pruebaNorm/{modelName}": {
+            "get": {
+                "summary": "Pruebanorm",
+                "operationId": "pruebaNorm_pruebaNorm__modelName__get",
+                "parameters": [{
+                    "required": true,
+                    "schema": { "title": "Modelname" },
+                    "name": "modelName",
+                    "in": "path"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": { "application/json": { "schema": {} } }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Body_login_for_access_token_token_post": {
+                "title": "Body_login_for_access_token_token_post",
+                "required": ["username", "password"],
+                "type": "object",
+                "properties": {
+                    "grant_type": {
+                        "title": "Grant Type",
+                        "pattern": "password",
+                        "type": "string"
+                    },
+                    "username": { "title": "Username", "type": "string" },
+                    "password": { "title": "Password", "type": "string" },
+                    "scope": { "title": "Scope", "type": "string", "default": "" },
+                    "client_id": { "title": "Client Id", "type": "string" },
+                    "client_secret": { "title": "Client Secret", "type": "string" }
+                }
+            },
+            "Body_uploadFiles_uploadFiles_post": {
+                "title": "Body_uploadFiles_uploadFiles_post",
+                "required": ["file"],
+                "type": "object",
+                "properties": {
+                    "file": { "title": "File", "type": "string", "format": "binary" }
+                }
+            },
+            "HTTPValidationError": {
+                "title": "HTTPValidationError",
+                "type": "object",
+                "properties": {
+                    "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/ValidationError" }
+                    }
+                }
+            },
+            "Token": {
+                "title": "Token",
+                "required": ["access_token", "token_type"],
+                "type": "object",
+                "properties": {
+                    "access_token": { "title": "Access Token", "type": "string" },
+                    "token_type": { "title": "Token Type", "type": "string" }
+                }
+            },
+            "ValidationError": {
+                "title": "ValidationError",
+                "required": ["loc", "msg", "type"],
+                "type": "object",
+                "properties": {
+                    "loc": {
+                        "title": "Location",
+                        "type": "array",
+                        "items": { "type": "string" }
+                    },
+                    "msg": { "title": "Message", "type": "string" },
+                    "type": { "title": "Error Type", "type": "string" }
+                }
+            }
+        }
+    }
+}
