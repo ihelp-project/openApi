@@ -1,0 +1,282 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1",
+        "title": "Title was not specified"
+    },
+    "paths": {
+        "/datacapture/schedule/test": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "description": "",
+                "tags": [
+                    "datacapture/schedule"
+                ],
+                "summary": "Testing operation",
+                "operationId": "test"
+            }
+        },
+        "/datacapture/schedule": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DataCaptureJobScheduled"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Exception's message"
+                    }
+                },
+                "description": "",
+                "tags": [
+                    "datacapture/schedule"
+                ],
+                "summary": "Returns the full list of all submitted scheduled jobs",
+                "operationId": "getAllDataCaptureScheduleJobs"
+            },
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                            "$ref": "#/definitions/DataCaptureJobScheduled"
+                        }
+                    },
+                    "500": {
+                        "description": "Exception's message"
+                    }
+                },
+                "description": "",
+                "tags": [
+                    "datacapture/schedule"
+                ],
+                "summary": "Submits a new scheduled job to capture data",
+                "operationId": "addDataCaptureScheduleJob",
+                "parameters": [{
+                    "in": "body",
+                    "description": "the data capture job to submit",
+                    "name": "body",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }]
+            }
+        },
+        "/datacapture/schedule/{id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                            "$ref": "#/definitions/DataCaptureJobScheduled"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Exception's message"
+                    }
+                },
+                "description": "",
+                "tags": [
+                    "datacapture/schedule"
+                ],
+                "summary": "Returns a scheduled job based on its id",
+                "operationId": "getDataCaptureScheduleJob",
+                "parameters": [{
+                    "in": "path",
+                    "description": "the id of the job",
+                    "name": "id",
+                    "required": true,
+                    "type": "string"
+                }]
+            }
+        },
+        "/datacapture/schedule/{id}/stop": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                            "$ref": "#/definitions/DataCaptureJobScheduled"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Exception's message"
+                    }
+                },
+                "description": "",
+                "tags": [
+                    "datacapture/schedule"
+                ],
+                "summary": "Stops a scheduled job based on its id",
+                "operationId": "stopDataCaptureScheduleJob",
+                "parameters": [{
+                    "in": "path",
+                    "description": "the id of the job",
+                    "name": "id",
+                    "required": true,
+                    "type": "string"
+                }]
+            }
+        }
+    },
+    "tags": [],
+    "host": "urldefense.com",
+    "basePath": "/v3/__http://localhost:54735/ihelp__;!!LQkDIss!X0PObk79SiZQn1Nb8kSh8B5dkZy9zTJlQZGOnZ1j9hKYKeM1Co02NtJF8q44seyHUxZiY3N0GTYMhuJGNgKrr6A$",
+    "schemes": [
+        "https"
+    ],
+    "definitions": {
+        "ConnectorArgumentsAbstract": {
+            "discriminator": "type",
+            "properties": {
+                "datePattern": {
+                    "type": "string",
+                    "description": "the date time patternt for the input"
+                },
+                "nullString": {
+                    "type": "string",
+                    "description": "this string will indicate if the value is null or not"
+                }
+            }
+        },
+        "ConverterArgumentsAbstract": {
+            "discriminator": "type",
+            "properties": {
+                "datePattern": {
+                    "type": "string",
+                    "description": "the date time patternt for the output"
+                }
+            }
+        },
+        "DataCaptureJobScheduled": {
+            "required": [
+                "schedule",
+                "keys",
+                "schema",
+                "dataset",
+                "connectorArguments",
+                "converterArguments"
+            ],
+            "properties": {
+                "schedule": {
+                    "$ref": "#/definitions/JobSchedule",
+                    "description": "indicates if the job will be send to a scheduler"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "the job's id"
+                },
+                "keys": {
+                    "type": "array",
+                    "description": "the job's keys",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "status": {
+                    "type": "string",
+                    "description": "the job's status"
+                },
+                "schema": {
+                    "$ref": "#/definitions/Object",
+                    "description": "the job's target dataset schema of the value"
+                },
+                "dataset": {
+                    "type": "string",
+                    "description": "the job's target dataset name to capture"
+                },
+                "dateAdded": {
+                    "type": "string",
+                    "description": "the job's date that has been added"
+                },
+                "dateFinished": {
+                    "type": "string",
+                    "description": "the job's date that has been finished/failed"
+                },
+                "connectorArguments": {
+                    "$ref": "#/definitions/ConnectorArgumentsAbstract",
+                    "description": "the job's arguments for its specific connectors"
+                },
+                "converterArguments": {
+                    "$ref": "#/definitions/ConverterArgumentsAbstract",
+                    "description": "the job's arguments for its specific converter"
+                }
+            }
+        },
+        "JobSchedule": {
+            "required": [
+                "future",
+                "periodic"
+            ],
+            "properties": {
+                "future": {
+                    "$ref": "#/definitions/JobScheduleFuture",
+                    "description": "indicates if the job will be schedule to start in the future"
+                },
+                "periodic": {
+                    "$ref": "#/definitions/JobSchedulePeriodic",
+                    "description": "indicates if the job will be schedule to start periodically"
+                }
+            }
+        },
+        "JobScheduleFuture": {
+            "required": [
+                "time",
+                "unit"
+            ],
+            "properties": {
+                "time": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "the schedule job's time (of the unit)"
+                },
+                "unit": {
+                    "type": "string",
+                    "description": "the schedule job's time unit"
+                }
+            }
+        },
+        "JobSchedulePeriodic": {
+            "required": [
+                "time",
+                "unit"
+            ],
+            "properties": {
+                "time": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "the schedule job's time (of the unit)"
+                },
+                "unit": {
+                    "type": "string",
+                    "description": "the schedule job's time unit"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,193 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1",
+        "title": "Title was not specified"
+    },
+    "paths": {
+        "/datacapture/test": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "description": "",
+                "tags": [
+                    "datacapture"
+                ],
+                "summary": "Testing operation",
+                "operationId": "test"
+            }
+        },
+        "/datacapture": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DataCaptureJob"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Exception's message"
+                    }
+                },
+                "description": "",
+                "tags": [
+                    "datacapture"
+                ],
+                "summary": "Returns the full list of all submitted jobs",
+                "operationId": "getAllDataCaptureJobs"
+            },
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                            "$ref": "#/definitions/DataCaptureJob"
+                        }
+                    },
+                    "500": {
+                        "description": "Exception's message"
+                    }
+                },
+                "description": "",
+                "tags": [
+                    "datacapture"
+                ],
+                "summary": "Submits a new job to capture data",
+                "operationId": "addDataCaptureJob",
+                "parameters": [{
+                    "in": "body",
+                    "description": "the data capture job to submit",
+                    "name": "body",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }]
+            }
+        },
+        "/datacapture/{id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                            "$ref": "#/definitions/DataCaptureJob"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Exception's message"
+                    }
+                },
+                "description": "",
+                "tags": [
+                    "datacapture"
+                ],
+                "summary": "Returns a job based on its id",
+                "operationId": "getDataCaptureJob",
+                "parameters": [{
+                    "in": "path",
+                    "description": "the id of the job",
+                    "name": "id",
+                    "required": true,
+                    "type": "string"
+                }]
+            }
+        }
+    },
+    "tags": [],
+    "host": "urldefense.com",
+    "basePath": "/v3/__http://localhost:54735/ihelp__;!!LQkDIss!X0PObk79SiZQn1Nb8kSh8B5dkZy9zTJlQZGOnZ1j9hKYKeM1Co02NtJF8q44seyHUxZiY3N0GTYMhuJGNgKrr6A$",
+    "schemes": [
+        "https"
+    ],
+    "definitions": {
+        "DataCaptureJob": {
+            "required": [
+                "dataset",
+                "schema",
+                "keys",
+                "connectorArguments",
+                "converterArguments"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "the job's id"
+                },
+                "dataset": {
+                    "type": "string",
+                    "description": "the job's target dataset name to capture"
+                },
+                "schema": {
+                    "$ref": "#/definitions/Object",
+                    "description": "the job's target dataset schema of the value"
+                },
+                "dateAdded": {
+                    "type": "string",
+                    "description": "the job's date that has been added"
+                },
+                "dateFinished": {
+                    "type": "string",
+                    "description": "the job's date that has been finished/failed"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "the job's status"
+                },
+                "keys": {
+                    "type": "array",
+                    "description": "the job's keys",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "connectorArguments": {
+                    "$ref": "#/definitions/ConnectorArgumentsAbstract",
+                    "description": "the job's arguments for its specific connectors"
+                },
+                "converterArguments": {
+                    "$ref": "#/definitions/ConverterArgumentsAbstract",
+                    "description": "the job's arguments for its specific converter"
+                }
+            }
+        },
+        "ConnectorArgumentsAbstract": {
+            "discriminator": "type",
+            "properties": {
+                "datePattern": {
+                    "type": "string",
+                    "description": "the date time patternt for the input"
+                },
+                "nullString": {
+                    "type": "string",
+                    "description": "this string will indicate if the value is null or not"
+                }
+            }
+        },
+        "ConverterArgumentsAbstract": {
+            "discriminator": "type",
+            "properties": {
+                "datePattern": {
+                    "type": "string",
+                    "description": "the date time patternt for the output"
+                }
+            }
+        }
+    }
+}

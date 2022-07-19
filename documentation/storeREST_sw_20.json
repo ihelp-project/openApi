@@ -1,0 +1,129 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1-SNAPSHOT",
+        "title": "Title was not specified"
+    },
+    "paths": {
+        "/process": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DataRow"
+                            }
+                        }
+                    }
+                },
+                "description": "",
+                "tags": [
+                    "process"
+                ],
+                "summary": "Executs a query",
+                "operationId": "executeQuery",
+                "parameters": [{
+                    "in": "query",
+                    "description": "the query to execute",
+                    "name": "query",
+                    "required": true,
+                    "type": "string"
+                }]
+            },
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "No response was specified",
+                        "schema": {
+                            "$ref": "#/definitions/IHelpUser"
+                        }
+                    }
+                },
+                "description": "",
+                "tags": [
+                    "process"
+                ],
+                "summary": "Insert a query",
+                "operationId": "insertQuery",
+                "parameters": [{
+                    "in": "body",
+                    "description": "the object to insert",
+                    "name": "body",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }]
+            }
+        }
+    },
+    "tags": [],
+    "host": "localhost:54735",
+    "basePath": "/ihelp",
+    "schemes": [
+        "http"
+    ],
+    "definitions": {
+        "DataColumn": {
+            "required": [
+                "name",
+                "value"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "column name"
+                },
+                "value": {
+                    "$ref": "#/definitions/Object",
+                    "description": "column value"
+                }
+            }
+        },
+        "IHelpUser": {
+            "required": [
+                "gender",
+                "date"
+            ],
+            "properties": {
+                "ihelpID": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "ihelp id"
+                },
+                "gender": {
+                    "type": "string",
+                    "description": "gender"
+                },
+                "date": {
+                    "type": "string",
+                    "description": "date"
+                },
+                "pilotID": {
+                    "type": "string",
+                    "description": "pilotID"
+                },
+                "healthentiaID": {
+                    "type": "string",
+                    "description": "healthentiaID"
+                }
+            }
+        },
+        "DataRow": {
+            "required": [
+                "row"
+            ],
+            "properties": {
+                "row": {
+                    "type": "array",
+                    "description": "the colums of the row",
+                    "items": {
+                        "$ref": "#/definitions/DataColumn"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,5668 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Healtheantia API",
+    "version": "v2"
+  },
+  "paths": {
+    "/v2/account/Login": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Login and create new access token and refresh token.",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenData"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenData"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/v2/account/RefreshToken": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Generates new access token with the given refresh token.",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenData"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenData"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/v2/data-provider/answers": {
+      "get": {
+        "tags": [
+          "DataProvider"
+        ],
+        "summary": "Request questionnaires answers data for a specific study.",
+        "parameters": [
+          {
+            "name": "studyId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "lastProcessedId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "nullable": true
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "languageCode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudyAnswersRecordResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudyAnswersRecordResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudyAnswersRecordResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/v2/data-provider/physiological": {
+      "get": {
+        "tags": [
+          "DataProvider"
+        ],
+        "summary": "Request physiological data for a specific study.",
+        "parameters": [
+          {
+            "name": "studyId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "lastProcessedId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "nullable": true
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudyPhysiologicalRecordResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudyPhysiologicalRecordResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudyPhysiologicalRecordResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/v2/data-provider/exercises": {
+      "get": {
+        "tags": [
+          "DataProvider"
+        ],
+        "summary": "Request exercise data for a specific study.",
+        "parameters": [
+          {
+            "name": "studyId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "lastProcessedId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "nullable": true
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudyExerciseRecordResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudyExerciseRecordResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudyExerciseRecordResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/v2/app/heart/date/{startDate}/{endDate}": {
+      "get": {
+        "tags": [
+          "MobileApp"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Heart"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Heart"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Heart"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/v2/study": {
+      "get": {
+        "tags": [
+          "Study"
+        ],
+        "summary": "Request user available studies info.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrialData"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrialData"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrialData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/v2/subjects": {
+      "get": {
+        "tags": [
+          "Subjects"
+        ],
+        "summary": "Get short details for all available subjects.",
+        "description": "Remarks:\r\n- To query only inactive subjects, fill **status** as **inactive** in Query Parameters.\r\n- To query only active subjects, fill **status** as **active** in Query Parameters.\r\n-- In the end of the endpoint: **?status=parameter**\r\n- To query by specific study, fill **studyId** in Query Parameters.\r\n-- In the end of the endpoint: **?studyId=parameter**",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "inactive",
+            "schema": {
+              "type": "string",
+              "description": "inactive",
+              "nullable": true
+            }
+          },
+          {
+            "name": "studyId",
+            "in": "query",
+            "description": "inactive",
+            "schema": {
+              "type": "integer",
+              "description": "inactive",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SimpleSubjectDetails"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SimpleSubjectDetails"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SimpleSubjectDetails"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/v2/subjects/{id}": {
+      "get": {
+        "tags": [
+          "Subjects"
+        ],
+        "summary": "Get subject details.",
+        "operationId": "SubjectById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Subject Id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Subject Id",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubjectDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubjectDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubjectDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginRequest": {
+        "required": [
+          "password",
+          "userName"
+        ],
+        "type": "object",
+        "properties": {
+          "userName": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AccessTokenData": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "expires": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RefreshTokenRequest": {
+        "required": [
+          "refreshToken"
+        ],
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SubjectAnswerRecord": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "subjectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "nullable": true
+          },
+          "sentDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "questionnaireId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "questionnaireTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "questionnaireCodename": {
+            "type": "string",
+            "nullable": true
+          },
+          "questionId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "questionTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "questionCodename": {
+            "type": "string",
+            "nullable": true
+          },
+          "answer": {
+            "type": "string",
+            "nullable": true
+          },
+          "score": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "parentQuestion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StudyAnswersRecordResult": {
+        "type": "object",
+        "properties": {
+          "studyId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectAnswerRecord"
+            },
+            "nullable": true
+          },
+          "isLastChunk": {
+            "type": "boolean"
+          },
+          "languageCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateFrom": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dateTo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastProcessedId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StudyPhysiologicalRecord": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "subjectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          },
+          "trend": {
+            "type": "number",
+            "format": "double"
+          },
+          "meanLong": {
+            "type": "number",
+            "format": "double"
+          },
+          "meanShort": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StudyPhysiologicalRecordResult": {
+        "type": "object",
+        "properties": {
+          "studyId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StudyPhysiologicalRecord"
+            },
+            "nullable": true
+          },
+          "isLastChunk": {
+            "type": "boolean"
+          },
+          "dateFrom": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dateTo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastProcessedId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StudyExerciseRecord": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "subjectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "startTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "activeDuration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "calories": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "speed": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "pace": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "steps": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "distance": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "distanceUnit": {
+            "type": "string",
+            "nullable": true
+          },
+          "elevationGain": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "averageHeartRate": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "outOfRangeMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fatBurnMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardioMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "peakMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "heartRateZones": {
+            "type": "string",
+            "nullable": true
+          },
+          "sedentaryMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lightlyMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fairlyMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "veryMinutes": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StudyExerciseRecordResult": {
+        "type": "object",
+        "properties": {
+          "studyId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StudyExerciseRecord"
+            },
+            "nullable": true
+          },
+          "isLastChunk": {
+            "type": "boolean"
+          },
+          "dateFrom": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dateTo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastProcessedId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TimeZone": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "aspNetUsers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AspNetUsers"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrialType": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Organization": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "zipCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "department": {
+            "type": "string",
+            "nullable": true
+          },
+          "therapeuticArea": {
+            "type": "string",
+            "nullable": true
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "croId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "authenticatorTFAEnabled": {
+            "type": "boolean"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AspNetUsers"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserTrial": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "baselineDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "terminationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "earlyTerminationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "acceptedTerms": {
+            "type": "boolean"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataProcessing": {
+            "type": "boolean"
+          },
+          "user": {
+            "$ref": "#/components/schemas/AspNetUsers"
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Site": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "codename": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "privacyUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "termsUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "shortTerms": {
+            "type": "string",
+            "nullable": true
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Exercise": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "logId": {
+            "type": "string",
+            "nullable": true
+          },
+          "logType": {
+            "type": "string",
+            "nullable": true
+          },
+          "activityTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "activityName": {
+            "type": "string",
+            "nullable": true
+          },
+          "activityDetailedName": {
+            "type": "string",
+            "nullable": true
+          },
+          "startTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "startTimeParsed": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "activeDuration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "calories": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "speed": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "pace": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "steps": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "distance": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "trainingLoad": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "distanceUnit": {
+            "type": "string",
+            "nullable": true
+          },
+          "elevationGain": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "manualValuesSpecified": {
+            "type": "string",
+            "nullable": true
+          },
+          "maximumHeartRate": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "averageHeartRate": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "outOfRangeMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fatBurnMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cardioMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "peakMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "heartRateZones": {
+            "type": "string",
+            "nullable": true
+          },
+          "sampleZones": {
+            "type": "string",
+            "nullable": true
+          },
+          "sedentaryMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lightlyMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fairlyMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "veryMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fatPercentage": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "carbohydratePercentage": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "proteinPercentage": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "origin": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastModified": {
+            "type": "string",
+            "nullable": true
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sourceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "syncedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/AspNetUsers"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrialLanguage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "systemLanguageCodeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPrimary": {
+            "type": "boolean"
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          },
+          "systemLanguage": {
+            "$ref": "#/components/schemas/SystemLanguage"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuestionnaireTitleTranslation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "questionnaireId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "languageCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "requiresUpdate": {
+            "type": "boolean"
+          },
+          "isPrimary": {
+            "type": "boolean"
+          },
+          "questionnaire": {
+            "$ref": "#/components/schemas/Questionnaire"
+          },
+          "systemLanguage": {
+            "$ref": "#/components/schemas/SystemLanguage"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuestionTitleTranslation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "questionId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "languageCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "maximumDescText": {
+            "type": "string",
+            "nullable": true
+          },
+          "minimumDescText": {
+            "type": "string",
+            "nullable": true
+          },
+          "valueDescText": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "requiresUpdate": {
+            "type": "boolean"
+          },
+          "isPrimary": {
+            "type": "boolean"
+          },
+          "question": {
+            "$ref": "#/components/schemas/Questions"
+          },
+          "systemLanguage": {
+            "$ref": "#/components/schemas/SystemLanguage"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SystemLanguage": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "trialLanguages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrialLanguage"
+            },
+            "nullable": true
+          },
+          "questionnaireTitleTranslations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionnaireTitleTranslation"
+            },
+            "nullable": true
+          },
+          "questionTitleTranslations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionTitleTranslation"
+            },
+            "nullable": true
+          },
+          "questionOptionTranslations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionOptionTranslation"
+            },
+            "nullable": true
+          },
+          "patients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Patient"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuestionOptionTranslation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "questionOptionId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "languageCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "requiresUpdate": {
+            "type": "boolean"
+          },
+          "isPrimary": {
+            "type": "boolean"
+          },
+          "questionOption": {
+            "$ref": "#/components/schemas/QuestionOptions"
+          },
+          "systemLanguage": {
+            "$ref": "#/components/schemas/SystemLanguage"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuestionOptions": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "questionId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "alertId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "doNotPlot": {
+            "type": "boolean"
+          },
+          "nextQuestion": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "isDelete": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          },
+          "mapId": {
+            "type": "string",
+            "nullable": true
+          },
+          "score": {
+            "type": "number",
+            "format": "float"
+          },
+          "question": {
+            "$ref": "#/components/schemas/Questions"
+          },
+          "questionOptionTranslations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionOptionTranslation"
+            },
+            "nullable": true
+          },
+          "patientAnswers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientAnswer"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Questions": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "questionnaireId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "codename": {
+            "type": "string",
+            "nullable": true
+          },
+          "shortName": {
+            "type": "string",
+            "nullable": true
+          },
+          "uicontrol": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "parentNumber": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalDigits": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "decimalDigits": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "compareTo": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "maximumValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "minimumValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "thresholdValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "maximumDesc": {
+            "type": "string",
+            "nullable": true
+          },
+          "minimumDesc": {
+            "type": "string",
+            "nullable": true
+          },
+          "valueDesc": {
+            "type": "string",
+            "nullable": true
+          },
+          "maximumDescSecondLanguage": {
+            "type": "string",
+            "nullable": true
+          },
+          "minimumDescSecondLanguage": {
+            "type": "string",
+            "nullable": true
+          },
+          "valueDescSecondLanguage": {
+            "type": "string",
+            "nullable": true
+          },
+          "ranges": {
+            "type": "string",
+            "nullable": true
+          },
+          "rangesDesc": {
+            "type": "string",
+            "nullable": true
+          },
+          "alertOperator": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "alertThreshold": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "alertId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "hasChildQuestion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nextQuestion": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "isDelete": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "replyMean": {
+            "type": "string",
+            "nullable": true
+          },
+          "replyStd": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayHorizontal": {
+            "type": "boolean"
+          },
+          "logDateTime": {
+            "type": "boolean"
+          },
+          "timerDuration": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "questionnaire": {
+            "$ref": "#/components/schemas/Questionnaire"
+          },
+          "patientAnswer": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientAnswer"
+            },
+            "nullable": true
+          },
+          "questionOptions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionOptions"
+            },
+            "nullable": true
+          },
+          "questionTitleTranslations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionTitleTranslation"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientAnswer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientQuestionnaireId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "questionnaireId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "questionId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "answer": {
+            "type": "string",
+            "nullable": true
+          },
+          "selectedOptionId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "replyOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "patientQuestionnaire": {
+            "$ref": "#/components/schemas/PatientQuestionnaire"
+          },
+          "question": {
+            "$ref": "#/components/schemas/Questions"
+          },
+          "questionnaire": {
+            "$ref": "#/components/schemas/Questionnaire"
+          },
+          "questionOption": {
+            "$ref": "#/components/schemas/QuestionOptions"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuestionnaireStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "QuestionnaireAdherence": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientQuestionnaireId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "questionnaireId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "status": {
+            "$ref": "#/components/schemas/QuestionnaireStatus"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "answerDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "patientQuestionnaire": {
+            "$ref": "#/components/schemas/PatientQuestionnaire"
+          },
+          "questionnaire": {
+            "$ref": "#/components/schemas/Questionnaire"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientQuestionnaire": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "questionnaireId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sendDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isUserInitiated": {
+            "type": "boolean"
+          },
+          "score": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "answeredBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "activityId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "remainingComponents": {
+            "type": "string",
+            "nullable": true
+          },
+          "alreadyAnswered": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentPatientQuestionnaireId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "questionnaire": {
+            "$ref": "#/components/schemas/Questionnaire"
+          },
+          "activity": {
+            "$ref": "#/components/schemas/Exercise"
+          },
+          "patientAnswer": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientAnswer"
+            },
+            "nullable": true
+          },
+          "patientNotification": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientNotification"
+            },
+            "nullable": true
+          },
+          "questionnaireAdherences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionnaireAdherence"
+            },
+            "nullable": true
+          },
+          "parentPatientQuestionnaire": {
+            "$ref": "#/components/schemas/PatientQuestionnaire"
+          },
+          "childrenComponents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientQuestionnaire"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientNotification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "instantNotificationId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "patientQuestionnaireId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "questionnaireId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "isRead": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sendDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isDelete": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "instantNotification": {
+            "$ref": "#/components/schemas/InstantNotification"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "patientQuestionnaire": {
+            "$ref": "#/components/schemas/PatientQuestionnaire"
+          },
+          "questionnaire": {
+            "$ref": "#/components/schemas/Questionnaire"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InstantNotification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sendDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "questionnaireId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "tags": {
+            "type": "string",
+            "nullable": true
+          },
+          "dynamicListId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "patients": {
+            "type": "string",
+            "nullable": true
+          },
+          "instantMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isDelete": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questionnaire": {
+            "$ref": "#/components/schemas/Questionnaire"
+          },
+          "patientNotification": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientNotification"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Types": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "shortname": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "questionnaireTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionnaireTypes"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuestionnaireTypes": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questionnaireId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "questionnaire": {
+            "$ref": "#/components/schemas/Questionnaire"
+          },
+          "typeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "$ref": "#/components/schemas/Types"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuestionnaireComponent": {
+        "type": "object",
+        "properties": {
+          "questionnaireId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "componentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "componentQuestionnaireId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "routingType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "routingOptions": {
+            "type": "string",
+            "nullable": true
+          },
+          "destinationTypeTrue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "destinationsOnTrue": {
+            "type": "string",
+            "nullable": true
+          },
+          "alertTypeTrue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "destinationTypeFalse": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "destinationsOnFalse": {
+            "type": "string",
+            "nullable": true
+          },
+          "alertTypeFalse": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tagType": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "questionnaire": {
+            "$ref": "#/components/schemas/Questionnaire"
+          },
+          "componentQuestionnaire": {
+            "$ref": "#/components/schemas/Questionnaire"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Questionnaire": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "codename": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          },
+          "instantNotification": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstantNotification"
+            },
+            "nullable": true
+          },
+          "patientAnswer": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientAnswer"
+            },
+            "nullable": true
+          },
+          "patientNotification": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientNotification"
+            },
+            "nullable": true
+          },
+          "patientQuestionnaire": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientQuestionnaire"
+            },
+            "nullable": true
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Questions"
+            },
+            "nullable": true
+          },
+          "questionnaireTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionnaireTypes"
+            },
+            "nullable": true
+          },
+          "questionnaireTitleTranslations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionnaireTitleTranslation"
+            },
+            "nullable": true
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionnaireComponent"
+            },
+            "nullable": true
+          },
+          "questionnaireAdherences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionnaireAdherence"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InsilicoInit": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "participants": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dateEnd": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "step": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "simulationStarted": {
+            "type": "boolean"
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InsilicoGroup": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "ageMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ageMax": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "healthMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "healthMax": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentage": {
+            "type": "number",
+            "format": "double"
+          },
+          "isEmployed": {
+            "type": "number",
+            "format": "double"
+          },
+          "vacationsDaysMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vacationsDaysMax": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "behaviorVariation": {
+            "type": "number",
+            "format": "double"
+          },
+          "outdoorAthletic": {
+            "type": "number",
+            "format": "double"
+          },
+          "indoorAthletic": {
+            "type": "number",
+            "format": "double"
+          },
+          "indoorEntertainment": {
+            "type": "number",
+            "format": "double"
+          },
+          "outdoorEntertainment": {
+            "type": "number",
+            "format": "double"
+          },
+          "bedLover": {
+            "type": "number",
+            "format": "double"
+          },
+          "workaholic": {
+            "type": "number",
+            "format": "double"
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InsilicoAdverseEffect": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "months": {
+            "type": "string",
+            "nullable": true
+          },
+          "probability": {
+            "type": "number",
+            "format": "double"
+          },
+          "symptoms": {
+            "type": "string",
+            "nullable": true
+          },
+          "health": {
+            "type": "string",
+            "nullable": true
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InsilicoMeasurement": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "met": {
+            "type": "number",
+            "format": "double"
+          },
+          "durationMean": {
+            "type": "number",
+            "format": "double"
+          },
+          "durationStd": {
+            "type": "number",
+            "format": "double"
+          },
+          "stepsProbability": {
+            "type": "number",
+            "format": "double"
+          },
+          "stepsMean": {
+            "type": "number",
+            "format": "double"
+          },
+          "stepsStd": {
+            "type": "number",
+            "format": "double"
+          },
+          "floorsMean": {
+            "type": "number",
+            "format": "double"
+          },
+          "floorsStd": {
+            "type": "number",
+            "format": "double"
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InsilicoVacation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "start": {
+            "type": "string",
+            "nullable": true
+          },
+          "end": {
+            "type": "string",
+            "nullable": true
+          },
+          "probability": {
+            "type": "number",
+            "format": "double"
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BiomarkerType": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "BiomarkerScheduling": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "BiomarkerTrainingType": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "BiomarkerResult": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "biomarkerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "outputVector": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "biomarker": {
+            "$ref": "#/components/schemas/Biomarker"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Biomarker": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "therapeuticArea": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/BiomarkerType"
+          },
+          "schedulingType": {
+            "$ref": "#/components/schemas/BiomarkerScheduling"
+          },
+          "trainingType": {
+            "$ref": "#/components/schemas/BiomarkerTrainingType"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "algorithm": {
+            "type": "string",
+            "nullable": true
+          },
+          "algorithmDetails": {
+            "type": "string",
+            "nullable": true
+          },
+          "inputVector": {
+            "type": "string",
+            "nullable": true
+          },
+          "outputVector": {
+            "type": "string",
+            "nullable": true
+          },
+          "outputValues": {
+            "type": "string",
+            "nullable": true
+          },
+          "performance": {
+            "type": "string",
+            "nullable": true
+          },
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "executionPlan": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousDataStep": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          },
+          "biomarkersResults": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BiomarkerResult"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PhenotypeAttributeGmm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "phenotypeAttributeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "mean": {
+            "type": "number",
+            "format": "double"
+          },
+          "var": {
+            "type": "number",
+            "format": "double"
+          },
+          "weight": {
+            "type": "number",
+            "format": "double"
+          },
+          "phenotypeAttribute": {
+            "$ref": "#/components/schemas/PhenotypeAttribute"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PhenotypeAttribute": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "phenotypeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "plottingData": {
+            "type": "string",
+            "nullable": true
+          },
+          "phenotype": {
+            "$ref": "#/components/schemas/Phenotype"
+          },
+          "phenotypeAttributeGmms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhenotypeAttributeGmm"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PhenotypeAssociation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "phenotypeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "phenotype": {
+            "$ref": "#/components/schemas/Phenotype"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientPhenotypeLikelihood": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "phenotypeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "probability": {
+            "type": "number",
+            "format": "double"
+          },
+          "phenotype": {
+            "$ref": "#/components/schemas/Phenotype"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientPhenotypeLatestProbability": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "phenotypeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "latestLikelihood": {
+            "type": "number",
+            "format": "double"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "phenotype": {
+            "$ref": "#/components/schemas/Phenotype"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Phenotype": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "weight": {
+            "type": "number",
+            "format": "double"
+          },
+          "phenotypeAttributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhenotypeAttribute"
+            },
+            "nullable": true
+          },
+          "phenotypesInstances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhenotypeInstance"
+            },
+            "nullable": true
+          },
+          "phenotypesAssociations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhenotypeAssociation"
+            },
+            "nullable": true
+          },
+          "patientsPhenotypesLikelihoods": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientPhenotypeLikelihood"
+            },
+            "nullable": true
+          },
+          "patientPhenotypesLatestProbabilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientPhenotypeLatestProbability"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PhenotypeInstance": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "phenotypeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          },
+          "phenotype": {
+            "$ref": "#/components/schemas/Phenotype"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SubjectSummaries": {
+        "required": [
+          "patientId"
+        ],
+        "type": "object",
+        "properties": {
+          "trialId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string"
+          },
+          "pendingQuestionnaires": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "notAnsweredQuestionnaires": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ongoingQuestionnaires": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "completedQuestionnaires": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "patientTags": {
+            "type": "string",
+            "nullable": true
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "patientTagsList": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Trial": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "subtitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/TrialType"
+          },
+          "codename": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "protocol": {
+            "type": "string",
+            "nullable": true
+          },
+          "disease": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "banner": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "termsUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasTerms": {
+            "type": "boolean"
+          },
+          "privacyUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasPrivacy": {
+            "type": "boolean"
+          },
+          "shortTerms": {
+            "type": "string",
+            "nullable": true
+          },
+          "faqPage": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactConsent": {
+            "type": "boolean"
+          },
+          "questionGraphs": {
+            "type": "string",
+            "nullable": true
+          },
+          "messaging": {
+            "type": "boolean"
+          },
+          "twoFactorAuthentication": {
+            "type": "boolean"
+          },
+          "treatmentReminder": {
+            "type": "boolean"
+          },
+          "siteSegregation": {
+            "type": "boolean"
+          },
+          "sleepWidget": {
+            "type": "boolean"
+          },
+          "waterWidget": {
+            "type": "boolean"
+          },
+          "activityWidget": {
+            "type": "boolean"
+          },
+          "bloodPressure": {
+            "type": "boolean"
+          },
+          "weightLog": {
+            "type": "boolean"
+          },
+          "heartRateMonitoring": {
+            "type": "boolean"
+          },
+          "map": {
+            "type": "boolean"
+          },
+          "organizationId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "progress": {
+            "type": "number",
+            "format": "double"
+          },
+          "patientFields": {
+            "type": "string",
+            "nullable": true
+          },
+          "dashboardReportId": {
+            "type": "string",
+            "nullable": true
+          },
+          "patientDetailsReportId": {
+            "type": "string",
+            "nullable": true
+          },
+          "allowPatientMedicationSetUp": {
+            "type": "boolean"
+          },
+          "displayTermsInApp": {
+            "type": "boolean"
+          },
+          "statisticsEnabled": {
+            "type": "boolean"
+          },
+          "subjectStatisticsConsent": {
+            "type": "boolean"
+          },
+          "spoTwo": {
+            "type": "boolean"
+          },
+          "mixPanelToken": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": true
+          },
+          "vcDialogName": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": true
+          },
+          "organization": {
+            "$ref": "#/components/schemas/Organization"
+          },
+          "userTrials": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserTrial"
+            },
+            "nullable": true
+          },
+          "sites": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Site"
+            },
+            "nullable": true
+          },
+          "questionnaires": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Questionnaire"
+            },
+            "nullable": true
+          },
+          "insilicoConfigs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InsilicoInit"
+            },
+            "nullable": true
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InsilicoGroup"
+            },
+            "nullable": true
+          },
+          "adverseEffects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InsilicoAdverseEffect"
+            },
+            "nullable": true
+          },
+          "insilicoMeasurements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InsilicoMeasurement"
+            },
+            "nullable": true
+          },
+          "insilicoVacations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InsilicoVacation"
+            },
+            "nullable": true
+          },
+          "trialLanguages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrialLanguage"
+            },
+            "nullable": true
+          },
+          "biomarkers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Biomarker"
+            },
+            "nullable": true
+          },
+          "phenotypesInstances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhenotypeInstance"
+            },
+            "nullable": true
+          },
+          "subjectSummaries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectSummaries"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Econsent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trialid": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          },
+          "zohoSignTemplateId": {
+            "type": "string",
+            "nullable": true
+          },
+          "consentQuestionnaireId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "comprehensionQuestionnaireId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "compositeQuestionnaireId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "signQuestionnaireId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "comprehensionQuestionnaireThreshold": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "phoneVerification": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "emailVerification": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "consentQuestionnaire": {
+            "$ref": "#/components/schemas/Questionnaire"
+          },
+          "comprehensionQuestionnaire": {
+            "$ref": "#/components/schemas/Questionnaire"
+          },
+          "signQuestionnaire": {
+            "$ref": "#/components/schemas/Questionnaire"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientCopdExarcebationState": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SecurityQuestions": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "securityQuestion": {
+            "type": "string",
+            "nullable": true
+          },
+          "securityQuestion_IT": {
+            "type": "string",
+            "nullable": true
+          },
+          "patientQuestion1Navigation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Patient"
+            },
+            "nullable": true
+          },
+          "patientQuestion2Navigation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Patient"
+            },
+            "nullable": true
+          },
+          "patientQuestion3Navigation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Patient"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          },
+          "removeTagList": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isAutoGenerated": {
+            "type": "boolean"
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "patientTag": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientTag"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientTag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tagId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "tag": {
+            "$ref": "#/components/schemas/Tag"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuestionUIControl": {
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Condition": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "CustomFieldGroupType": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "CustomField_Group": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "condition": {
+            "$ref": "#/components/schemas/Condition"
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ordering": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "$ref": "#/components/schemas/CustomFieldGroupType"
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          },
+          "customFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomField"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientFieldValue": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "customFieldId": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "customField": {
+            "$ref": "#/components/schemas/CustomField"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomField": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "questionCodename": {
+            "type": "string",
+            "nullable": true
+          },
+          "uiControl": {
+            "$ref": "#/components/schemas/QuestionUIControl"
+          },
+          "isProfileField": {
+            "type": "boolean"
+          },
+          "cssClass": {
+            "type": "string",
+            "nullable": true
+          },
+          "fieldOptions": {
+            "type": "string",
+            "nullable": true
+          },
+          "ordering": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "question": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Questions"
+            },
+            "nullable": true
+          },
+          "group": {
+            "$ref": "#/components/schemas/CustomField_Group"
+          },
+          "patientMetas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientMeta"
+            },
+            "nullable": true
+          },
+          "patientFieldValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientFieldValue"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientMeta": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "fieldId": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "field": {
+            "$ref": "#/components/schemas/CustomField"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentType": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "PatientDocument": {
+        "required": [
+          "fileBase64"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileBase64": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DocumentType"
+          },
+          "source": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Steps": {
+        "type": "object",
+        "properties": {
+          "dateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "value": {
+            "type": "number",
+            "format": "float"
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sourceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "syncedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/AspNetUsers"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AlertStatus": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "DeviceType": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "InteractionStatus": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "DeviceInteraction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "status": {
+            "$ref": "#/components/schemas/InteractionStatus"
+          },
+          "requestDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "initDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "finishDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "secret": {
+            "type": "string",
+            "nullable": true
+          },
+          "deviceId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "expireAt": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tokenStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "device": {
+            "$ref": "#/components/schemas/Device"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Device": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DeviceType"
+          },
+          "serialNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "deviceVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "firmwareVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "nullable": true
+          },
+          "locationMeta": {
+            "type": "string",
+            "nullable": true
+          },
+          "publicKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "organizationId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/Organization"
+          },
+          "patientDevices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientDevice"
+            },
+            "nullable": true
+          },
+          "deviceInteractions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeviceInteraction"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientDevice": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "associationTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "$ref": "#/components/schemas/AlertStatus"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "deviceId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "device": {
+            "$ref": "#/components/schemas/Device"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientMlData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trend": {
+            "type": "number",
+            "format": "double"
+          },
+          "meanLong": {
+            "type": "number",
+            "format": "double"
+          },
+          "meanShort": {
+            "type": "number",
+            "format": "double"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          },
+          "squaredMeanLong": {
+            "type": "number",
+            "format": "double"
+          },
+          "squaredMeanShort": {
+            "type": "number",
+            "format": "double"
+          },
+          "counter": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientMlRawData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "questionId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "trend": {
+            "type": "number",
+            "format": "double"
+          },
+          "meanLong": {
+            "type": "number",
+            "format": "double"
+          },
+          "meanShort": {
+            "type": "number",
+            "format": "double"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          },
+          "squaredMeanLong": {
+            "type": "number",
+            "format": "double"
+          },
+          "squaredMeanShort": {
+            "type": "number",
+            "format": "double"
+          },
+          "counter": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "conversationId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "fileType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sentOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "conversation": {
+            "$ref": "#/components/schemas/Conversation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Conversation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "portalUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "category": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "readByPatient": {
+            "type": "boolean"
+          },
+          "readByPortalUser": {
+            "type": "boolean"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "portalUser": {
+            "$ref": "#/components/schemas/AspNetUsers"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MedicationClass": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "PatientDoseTimeHelper": {
+        "type": "object",
+        "properties": {
+          "taken": {
+            "type": "boolean"
+          },
+          "dose": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "time": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientMedicationHistory": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "treatmentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dosesTaken": {
+            "type": "string",
+            "nullable": true
+          },
+          "dailyDoses": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "dose": {
+            "type": "string",
+            "nullable": true
+          },
+          "treatmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "treatment": {
+            "$ref": "#/components/schemas/PatientTreatment"
+          },
+          "dosesTakenList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientDoseTimeHelper"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DoseTimeHelper": {
+        "type": "object",
+        "properties": {
+          "dose": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "time": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientTreatment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "dose": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "doctor": {
+            "type": "string",
+            "nullable": true
+          },
+          "frequency": {
+            "type": "string",
+            "nullable": true
+          },
+          "everyXDays": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "timesPerDay": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "treatmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "dosesTimes": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "reminderEnabled": {
+            "type": "boolean"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "durationInDays": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "class": {
+            "$ref": "#/components/schemas/MedicationClass"
+          },
+          "createdByDoctor": {
+            "type": "boolean"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "suspendReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "patientMedicationHistories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientMedicationHistory"
+            },
+            "nullable": true
+          },
+          "dosesTimesList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DoseTimeHelper"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Alert": {
+        "required": [
+          "message",
+          "patientId",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "codename": {
+            "type": "string",
+            "nullable": true
+          },
+          "tagList": {
+            "type": "string",
+            "nullable": true
+          },
+          "patientQuestionnaireId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "patientNotificationId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "patientId": {
+            "type": "string"
+          },
+          "ownerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "patientQuestionnaire": {
+            "$ref": "#/components/schemas/PatientQuestionnaire"
+          },
+          "patientNotification": {
+            "$ref": "#/components/schemas/PatientNotification"
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/AspNetUsers"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Patient": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "shortId": {
+            "type": "string",
+            "nullable": true
+          },
+          "patientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "siteId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "trackerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "fitbitUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "garminAccessToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "managedFitbitAccount": {
+            "type": "boolean"
+          },
+          "fcmToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "screeningDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "studyCompletionDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "earlyTerminationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "treatmentCron": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "height": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "language": {
+            "type": "string",
+            "nullable": true
+          },
+          "connectedDeviceDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "connectedTrackerDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "severity": {
+            "type": "string",
+            "nullable": true
+          },
+          "disease": {
+            "type": "string",
+            "nullable": true
+          },
+          "answer1": {
+            "type": "string",
+            "nullable": true
+          },
+          "answer2": {
+            "type": "string",
+            "nullable": true
+          },
+          "answer3": {
+            "type": "string",
+            "nullable": true
+          },
+          "question1": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "question2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "question3": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "investigatorNotes": {
+            "type": "string",
+            "nullable": true
+          },
+          "econsent": {
+            "$ref": "#/components/schemas/Econsent"
+          },
+          "econsentSignedFile": {
+            "type": "string",
+            "nullable": true
+          },
+          "econsentSignedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "allowRecruit": {
+            "type": "boolean"
+          },
+          "allowReporting": {
+            "type": "boolean"
+          },
+          "allowStatistics": {
+            "type": "boolean"
+          },
+          "generalTerms": {
+            "type": "boolean"
+          },
+          "suspended": {
+            "type": "boolean"
+          },
+          "qTrobot": {
+            "type": "string",
+            "nullable": true
+          },
+          "activitySource": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "copdExarcebationState": {
+            "$ref": "#/components/schemas/PatientCopdExarcebationState"
+          },
+          "copdExacerbationSuperState": {
+            "type": "string",
+            "nullable": true
+          },
+          "superStateTransferedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "idNavigation": {
+            "$ref": "#/components/schemas/AspNetUsers"
+          },
+          "question1Navigation": {
+            "$ref": "#/components/schemas/SecurityQuestions"
+          },
+          "question2Navigation": {
+            "$ref": "#/components/schemas/SecurityQuestions"
+          },
+          "question3Navigation": {
+            "$ref": "#/components/schemas/SecurityQuestions"
+          },
+          "patientNotification": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientNotification"
+            },
+            "nullable": true
+          },
+          "patientQuestionnaire": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientQuestionnaire"
+            },
+            "nullable": true
+          },
+          "patientTag": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientTag"
+            },
+            "nullable": true
+          },
+          "patientMeta": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientMeta"
+            },
+            "nullable": true
+          },
+          "patientDocuments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientDocument"
+            },
+            "nullable": true
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Steps"
+            },
+            "nullable": true
+          },
+          "patientDevices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientDevice"
+            },
+            "nullable": true
+          },
+          "deviceInteractions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeviceInteraction"
+            },
+            "nullable": true
+          },
+          "patientMlData": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientMlData"
+            },
+            "nullable": true
+          },
+          "patientMlRawData": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientMlRawData"
+            },
+            "nullable": true
+          },
+          "conversations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Conversation"
+            },
+            "nullable": true
+          },
+          "patientTreatments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientTreatment"
+            },
+            "nullable": true
+          },
+          "biomarkersResults": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BiomarkerResult"
+            },
+            "nullable": true
+          },
+          "phenotypesAssociations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhenotypeAssociation"
+            },
+            "nullable": true
+          },
+          "patientsPhenotypesLikelihoods": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientPhenotypeLikelihood"
+            },
+            "nullable": true
+          },
+          "patientPhenotypesLatestProbabilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientPhenotypeLatestProbability"
+            },
+            "nullable": true
+          },
+          "alerts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Alert"
+            },
+            "nullable": true
+          },
+          "patientFieldValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientFieldValue"
+            },
+            "nullable": true
+          },
+          "subjectSummaries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectSummaries"
+            },
+            "nullable": true
+          },
+          "systemLanguage": {
+            "$ref": "#/components/schemas/SystemLanguage"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminAccessRights": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "roleId": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "role": {
+            "$ref": "#/components/schemas/AspNetRoles"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AspNetRoles": {
+        "type": "object",
+        "properties": {
+          "isSystemRole": {
+            "type": "boolean"
+          },
+          "isRoleModel": {
+            "type": "boolean"
+          },
+          "isBuiltInRole": {
+            "type": "boolean"
+          },
+          "organizationId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "organization": {
+            "$ref": "#/components/schemas/Organization"
+          },
+          "adminAccessRights": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminAccessRights"
+            },
+            "nullable": true
+          },
+          "aspNetUserRoles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AspNetUserRoles"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "normalizedName": {
+            "type": "string",
+            "nullable": true
+          },
+          "concurrencyStamp": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AspNetUserRoles": {
+        "type": "object",
+        "properties": {
+          "trialId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "role": {
+            "$ref": "#/components/schemas/AspNetRoles"
+          },
+          "user": {
+            "$ref": "#/components/schemas/AspNetUsers"
+          },
+          "trial": {
+            "$ref": "#/components/schemas/Trial"
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserSite": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "siteId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "user": {
+            "$ref": "#/components/schemas/AspNetUsers"
+          },
+          "site": {
+            "$ref": "#/components/schemas/Site"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Sleep": {
+        "type": "object",
+        "properties": {
+          "logId": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateOfSleep": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "efficiency": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "infoCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "levels": {
+            "type": "string",
+            "nullable": true
+          },
+          "light": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rem": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "deep": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "wake": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "minutesAfterWakeup": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "minutesAsleep": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minutesAwake": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "minutesToFallAsleep": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "timeInBed": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sourceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "syncedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/AspNetUsers"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Oxygen": {
+        "type": "object",
+        "properties": {
+          "dateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "min": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "max": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "avg": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sourceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "syncedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/AspNetUsers"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Basic": {
+        "type": "object",
+        "properties": {
+          "dateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "value": {
+            "type": "number",
+            "format": "float"
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sourceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "syncedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/AspNetUsers"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AspNetUsers": {
+        "type": "object",
+        "properties": {
+          "fcmToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeZone": {
+            "$ref": "#/components/schemas/TimeZone"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "aspNetUserRoles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AspNetUserRoles"
+            },
+            "nullable": true
+          },
+          "organization": {
+            "$ref": "#/components/schemas/Organization"
+          },
+          "userTrials": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserTrial"
+            },
+            "nullable": true
+          },
+          "userSites": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserSite"
+            },
+            "nullable": true
+          },
+          "sleeps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Sleep"
+            },
+            "nullable": true
+          },
+          "oxygens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Oxygen"
+            },
+            "nullable": true
+          },
+          "basics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Basic"
+            },
+            "nullable": true
+          },
+          "hearts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Heart"
+            },
+            "nullable": true
+          },
+          "exercises": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Exercise"
+            },
+            "nullable": true
+          },
+          "conversations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Conversation"
+            },
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fiscalNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "externalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "authenticatorTFASecret": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "avatar": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeZoneId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "organizationId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "selectedTrial": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "skipStart": {
+            "type": "boolean"
+          },
+          "authenticatorTFAVerified": {
+            "type": "boolean"
+          },
+          "passwordExpires": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "authenticatorTFAVerifiedDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "normalizedUserName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "normalizedEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailConfirmed": {
+            "type": "boolean"
+          },
+          "passwordHash": {
+            "type": "string",
+            "nullable": true
+          },
+          "securityStamp": {
+            "type": "string",
+            "nullable": true
+          },
+          "concurrencyStamp": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumberConfirmed": {
+            "type": "boolean"
+          },
+          "twoFactorEnabled": {
+            "type": "boolean"
+          },
+          "lockoutEnd": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lockoutEnabled": {
+            "type": "boolean"
+          },
+          "accessFailedCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Heart": {
+        "type": "object",
+        "properties": {
+          "activityDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dateTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "min": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "max": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "avg": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "restingHeartRate": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "outOfRangeMinutes": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "outOfRangeCalories": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "outOfRangeRaw": {
+            "type": "string",
+            "nullable": true
+          },
+          "fatBurnMinutes": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fatBurnCalories": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "fatBurnRaw": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardioMinutes": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cardioCalories": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cardioRaw": {
+            "type": "string",
+            "nullable": true
+          },
+          "peakMinutes": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "peakCalories": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "peakRaw": {
+            "type": "string",
+            "nullable": true
+          },
+          "customHeartRateZones": {
+            "type": "string",
+            "nullable": true
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sourceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "syncedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/AspNetUsers"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrialData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "codename": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "deleted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SimpleSubjectDetails": {
+        "type": "object",
+        "properties": {
+          "subjectIdentificationNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "trialId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "trackerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "sex": {
+            "type": "string",
+            "nullable": true
+          },
+          "baselineDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "terminationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "earlyTerminationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientMetaDetails": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "codename": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SubjectDetails": {
+        "type": "object",
+        "properties": {
+          "subjectIdentificationNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeZone": {
+            "type": "string",
+            "nullable": true
+          },
+          "trackerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "baselineDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "terminationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "earlyTerminationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "sex": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "height": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "weight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "disease": {
+            "type": "string",
+            "nullable": true
+          },
+          "severity": {
+            "type": "string",
+            "nullable": true
+          },
+          "qtRobotId": {
+            "type": "string",
+            "nullable": true
+          },
+          "metadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientMetaDetails"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header using the Bearer scheme.",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}
