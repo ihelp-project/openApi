@@ -1,0 +1,2389 @@
+{
+	"openapi":"3.0.2",
+	"info":{
+		"title":"Clickhouse API",
+		"version":"1.0.0"
+	},
+	"paths":{
+		"/api/clickhouse/alerts/{ruleset_id}":{
+			"get":{
+				"tags":["Get Alerts by Ruleset"],
+				"summary":"Get Alerts By Ruleset",
+				"operationId":"get_alerts_by_ruleset_api_clickhouse_alerts__ruleset_id__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Ruleset Id"
+					},
+					"name":"ruleset_id","in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[{
+											"created":"2021-09-20T14:45:25",
+											"ruleset_name":"ruleset4",
+											"user_name":"Artyannie",
+											"user_id":"1132230860",
+											"trigger":"text contains patient AND text contains health",
+											"id":"238619a0-727e-4e3d-954a-1d473e14c3f6",
+											"ruleset_id":"e3d6eb19-506c-40e4-a780-592e7dc2007b"
+										},
+										{
+											"created":"2021-09-20T14:45:25",
+											"ruleset_name":"ruleset4",
+											"user_name":"Artyannie",
+											"user_id":"1132230860",
+											"trigger":"text contains patient AND text contains health",
+											"id":"346e01be-1a28-44aa-91ac-07f7291a55d9",
+											"ruleset_id":"e3d6eb19-506c-40e4-a780-592e7dc2007b"
+										}]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/alerts/id/{ruleset_id}/{alert_id}":{
+			"get":{
+				"tags":["Get Alert by Alert ID"],
+				"summary":"Get Alerts By Alert Id",
+				"operationId":"get_alerts_by_alert_id_api_clickhouse_alerts_id__ruleset_id___alert_id__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Ruleset Id","type":"string"
+					},
+					"name":"ruleset_id",
+					"in":"path"
+				},
+				{
+					"required":true,
+					"schema":{
+						"title":"Alert Id",
+						"type":"string"
+					},
+					"name":"alert_id",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[{
+											"created":"2021-09-20T14:45:25",
+											"ruleset_name":"ruleset4",
+											"user_name":"Artyannie",
+											"user_id":"1132230860",
+											"trigger":"text contains patient AND text contains health",
+											"id":"238619a0-727e-4e3d-954a-1d473e14c3f6",
+											"ruleset_id":"e3d6eb19-506c-40e4-a780-592e7dc2007b"
+										},
+										{
+											"created":"2021-09-20T14:45:25",
+											"ruleset_name":"ruleset4",
+											"user_name":"Artyannie",
+											"user_id":"1132230860",
+											"trigger":"text contains patient AND text contains health",
+											"id":"346e01be-1a28-44aa-91ac-07f7291a55d9",
+											"ruleset_id":"e3d6eb19-506c-40e4-a780-592e7dc2007b"
+										}]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/alerts/count/{ruleset_id}":{
+			"get":{
+				"tags":["Get Alert Count by Ruleset ID"],
+				"summary":"Get Alert Count By Ruleset Name",
+				"operationId":"get_alert_count_by_ruleset_name_api_clickhouse_alerts_count__ruleset_id__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Ruleset Id",
+						"type":"string"
+					},
+					"name":"ruleset_id",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[137]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/alerts/page/{ruleset_id}":{
+			"get":{
+				"tags":["Get Alerts by Ruleset Paged"],
+				"summary":"Get Alerts By Ruleset Paged",
+				"operationId":"get_alerts_by_ruleset_paged_api_clickhouse_alerts_page__ruleset_id__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Ruleset Id",
+						"type":"string"
+					},
+					"name":"ruleset_id",
+					"in":"path"
+				},
+				{
+					"required":false,
+					"schema":{
+						"title":"Num",
+						"type":"integer",
+						"default":1
+					},
+					"name":"num",
+					"in":"query"
+				},
+				{
+					"required":false,
+					"schema":{
+						"title":"Size",
+						"type":"integer",
+						"default":10
+					},
+					"name":"size",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[{
+											"created":"2021-09-20T14:45:25",
+											"ruleset_name":"ruleset4",
+											"user_name":"Artyannie",
+											"user_id":"1132230860",
+											"trigger":"text contains patient AND text contains health",
+											"id":"238619a0-727e-4e3d-954a-1d473e14c3f6",
+											"ruleset_id":"e3d6eb19-506c-40e4-a780-592e7dc2007b"
+										},
+										{
+											"created":"2021-09-20T14:45:25",
+											"ruleset_name":"ruleset4",
+											"user_name":"Artyannie",
+											"user_id":"1132230860",
+											"trigger":"text contains patient AND text contains health",
+											"id":"346e01be-1a28-44aa-91ac-07f7291a55d9",
+											"ruleset_id":"e3d6eb19-506c-40e4-a780-592e7dc2007b"
+										}]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/events/{ruleset_id}":{
+			"get":{
+				"tags":["Get Events by Ruleset"],
+				"summary":"Get Events By Ruleset",
+				"operationId":"get_events_by_ruleset_api_clickhouse_events__ruleset_id__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Ruleset Id",
+						"type":"string"
+					},
+					"name":"ruleset_id",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[{
+											"created":"2021-09-20T14:45:25",
+											"ruleset_name":"ruleset4",
+											"user_name":"Artyannie",
+											"user_id":"1132230860",
+											"trigger":"text contains patient AND text contains health",
+											"id":"238619a0-727e-4e3d-954a-1d473e14c3f6",
+											"ruleset_id":"e3d6eb19-506c-40e4-a780-592e7dc2007b"
+										},
+										{
+											"created":"2021-09-20T14:45:25",
+											"ruleset_name":"ruleset4",
+											"user_name":"Artyannie",
+											"user_id":"1132230860",
+											"trigger":"text contains patient AND text contains health",
+											"id":"346e01be-1a28-44aa-91ac-07f7291a55d9",
+											"ruleset_id":"e3d6eb19-506c-40e4-a780-592e7dc2007b"
+										}]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/events/page/{ruleset_id}":{
+			"get":{
+				"tags":["Get Events by Ruleset Paged"],
+				"summary":"Get Events",
+				"operationId":"get_events_api_clickhouse_events_page__ruleset_id__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Ruleset Id",
+						"type":"string"
+					},
+					"name":"ruleset_id",
+					"in":"path"
+				},
+				{
+					"required":false,
+					"schema":{
+						"title":"Num",
+						"type":"integer",
+						"default":1
+					},
+					"name":"num",
+					"in":"query"
+				},
+				{
+					"required":false,
+					"schema":{
+						"title":"Size",
+						"type":"integer",
+						"default":10
+					},
+					"name":"size",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[{
+											"created":"2021-09-20T14:45:25",
+											"ruleset_name":"ruleset4",
+											"user_name":"Artyannie",
+											"user_id":"1132230860",
+											"trigger":"text contains patient AND text contains health",
+											"id":"238619a0-727e-4e3d-954a-1d473e14c3f6",
+											"ruleset_id":"e3d6eb19-506c-40e4-a780-592e7dc2007b"
+										},
+										{
+											"created":"2021-09-20T14:45:25",
+											"ruleset_name":"ruleset4",
+											"user_name":"Artyannie",
+											"user_id":"1132230860",
+											"trigger":"text contains patient AND text contains health",
+											"id":"346e01be-1a28-44aa-91ac-07f7291a55d9",
+											"ruleset_id":"e3d6eb19-506c-40e4-a780-592e7dc2007b"
+										}]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/events/{ruleset_id}/{alert_id}":{
+			"get":{
+				"tags":["Get Events from Ruleset by Alert ID"],
+				"summary":"Get Events From Ruleset By Alert Id",
+				"operationId":"get_events_from_ruleset_by_alert_id_api_clickhouse_events__ruleset_id___alert_id__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Ruleset Id",
+						"type":"string"
+					},
+					"name":"ruleset_id",
+					"in":"path"
+				},
+				{
+					"required":true,
+					"schema":{
+						"title":"Alert Id",
+						"type":"string"
+					},
+					"name":"alert_id",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[{
+											"alert_id":"c345231e-9f12-4f21-a027-63b6763d55ee",
+											"user_id":"171154445",
+											"user_name":"senojus",
+											"user_location":"Flintshire",
+											"text":"RT @RichardBurgon: I have secured a debate in Parliament next week on the future of our NHS.\n\nI will be demanding:\n\n▪️an end to the creepin…",
+											"created":"2021-09-20T13:38:48",
+											"polarity":0,
+											"subjectivity":0.06,
+											"posneg":"positive",
+											"found_word":"",
+											"trigger":"polarity less than 0.75",
+											"ruleset_id":"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac"
+										},
+										{
+											"alert_id":"6f79d2e8-aae0-4ca1-843a-390dce98bfaa",
+											"user_id":"171154445",
+											"user_name":"senojus",
+											"user_location":"Flintshire",
+											"text":"RT @RichardBurgon: I have secured a debate in Parliament next week on the future of our NHS.\n\nI will be demanding:\n\n▪️an end to the creepin…",
+											"created":"2021-09-20T13:38:48",
+											"polarity":0,
+											"subjectivity":0.06,
+											"posneg":"positive",
+											"found_word":"",
+											"trigger":"polarity less than 0.75",
+											"ruleset_id":"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac"
+										}]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/events/user/{ruleset_id}/{user_id}":{
+			"get":{
+				"tags":["Get Events from Ruleset by User"],
+				"summary":"Get Events From Ruleset By User",
+				"operationId":"get_events_from_ruleset_by_user_api_clickhouse_events_user__ruleset_id___user_id__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Ruleset Id",
+						"type":"string"
+					},
+					"name":"ruleset_id",
+					"in":"path"
+				},
+				{
+					"required":true,
+					"schema":{
+						"title":"User Id",
+						"type":"string"
+					},
+					"name":"user_id",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[{
+											"alert_id":"c345231e-9f12-4f21-a027-63b6763d55ee",
+											"user_id":"171154445",
+											"user_name":"senojus",
+											"user_location":"Flintshire",
+											"text":"RT @RichardBurgon: I have secured a debate in Parliament next week on the future of our NHS.\n\nI will be demanding:\n\n▪️an end to the creepin…",
+											"created":"2021-09-20T13:38:48",
+											"polarity":0,
+											"subjectivity":0.06,
+											"posneg":"positive",
+											"found_word":"",
+											"trigger":"polarity less than 0.75",
+											"ruleset_id":"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac"
+										},
+										{
+											"alert_id":"6f79d2e8-aae0-4ca1-843a-390dce98bfaa",
+											"user_id":"171154445",
+											"user_name":"senojus",
+											"user_location":"Flintshire",
+											"text":"RT @RichardBurgon: I have secured a debate in Parliament next week on the future of our NHS.\n\nI will be demanding:\n\n▪️an end to the creepin…",
+											"created":"2021-09-20T13:38:48",
+											"polarity":0,
+											"subjectivity":0.06,
+											"posneg":"positive",
+											"found_word":"",
+											"trigger":"polarity less than 0.75",
+											"ruleset_id":"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac"
+										}]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/users":{
+			"get":{
+				"tags":["Get Users"],
+				"summary":"Get Users",
+				"operationId":"get_users_api_clickhouse_users_get",
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[{
+											"user_id":"57306714",
+											"user_name":"UHP_NHS",
+											"max_id":1458091330652024800,
+											"created":"2021-11-08T10:04:50"
+										},
+										{
+											"user_id":"276442577",
+											"user_name":"StarterPat",
+											"max_id":1458094062595186700,
+											"created":"2021-11-08T15:03:58"
+										}]
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"post":{
+				"tags":["Insert User"],
+				"summary":"Insert User",
+				"operationId":"insert_user_api_clickhouse_users_post",
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/users/social_media/":{
+			"get":{
+				"tags":["Get Users by Social Media"],
+				"summary":"Get Users By Social Media Source",
+				"operationId":"get_users_by_social_media_source_api_clickhouse_users_social_media__get",
+				"parameters":[{
+					"required":false,
+					"schema":{
+						"title":"Social Media",
+						"type":"string",
+						"default":"Twitter"
+					},
+					"name":"social_media",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[{
+											"user_id":"57306714",
+											"user_name":"UHP_NHS",
+											"max_id":1458091330652024800,
+											"created":"2021-11-08T10:04:50"
+										},
+										{
+											"user_id":"276442577",
+											"user_name":"StarterPat",
+											"max_id":1458094062595186700,
+											"created":"2021-11-08T15:03:58"
+										}]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/users/single/{user_id}/{social_media_source}":{
+			"get":{
+				"tags":["Get User by ID"],
+				"summary":"Get User By Id",
+				"operationId":"get_user_by_id_api_clickhouse_users_single__user_id___social_media_source__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"User Id",
+						"type":"string"
+					},
+					"name":"user_id",
+					"in":"path"
+				},
+				{
+					"required":true,
+					"schema":{
+						"title":"Social Media Source",
+						"type":"string"
+					},
+					"name":"social_media_source",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[{
+											"user_id":"57306714",
+											"user_name":"UHP_NHS",
+											"max_id":1458091330652024800,
+											"created":"2021-11-08T10:04:50"
+										}]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/users/{user_id}/{social_media_source}":{
+			"delete":{
+				"tags":["Delete User"],
+				"summary":"Delete User",
+				"operationId":"delete_user_api_clickhouse_users__user_id___social_media_source__delete",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"User Id",
+						"type":"string"
+					},
+					"name":"user_id",
+					"in":"path"
+				},
+				{
+					"required":true,
+					"schema":{
+						"title":"Social Media Source",
+						"type":"string"
+					},
+					"name":"social_media_source",
+					
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/users/{user_id}/{social_media_source}/{max_id}":{
+			"put":{
+				"tags":["Update Max ID of User"],
+				"summary":"Update Max Id Of User",
+				"operationId":"update_max_id_of_user_api_clickhouse_users__user_id___social_media_source___max_id__put",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Max Id",
+						"type":"string"
+					},
+					"name":"max_id",
+					"in":"path"
+				},
+				{
+					"required":true,
+					"schema":{
+						"title":"Social Media Source",
+						"type":"string"
+					},
+					"name":"social_media_source",
+					"in":"path"
+				},
+				{
+					"required":true,
+					"schema":{
+						"title":"User Id",
+						"type":"string"
+					},
+					"name":"user_id",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/users/message/{user_id}/{social_media_source}":{
+			"get":{
+				"tags":["Get User Message by ID"],
+				"summary":"Get User Message By Id",
+				"operationId":"get_user_message_by_id_api_clickhouse_users_message__user_id___social_media_source__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"User Id",
+						"type":"string"
+					},
+					"name":"user_id",
+					"in":"path"
+				},
+				{
+					"required":true,
+					"schema":{
+						"title":"Social Media Source",
+						"type":"string"
+					},
+					"name":"social_media_source",
+					"in":"path"
+				},
+				{
+					"required":false,
+					"schema":{
+						"title":"Num",
+						"type":"integer",
+						"default":1
+					},
+					"name":"num",
+					"in":"query"
+				},
+				{
+					"required":false,
+					"schema":{
+						"title":"Size",
+						"type":"integer",
+						"default":10
+					},
+					"name":"size",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[{
+											"alert_id":"c345231e-9f12-4f21-a027-63b6763d55ee",
+											"user_id":"171154445",
+											"user_name":"senojus",
+											"user_location":"Flintshire",
+											"text":"RT @RichardBurgon: I have secured a debate in Parliament next week on the future of our NHS.\n\nI will be demanding:\n\n▪️an end to the creepin…",
+											"created":"2021-09-20T13:38:48",
+											"polarity":0,
+											"subjectivity":0.06,
+											"posneg":"positive",
+											"found_word":"",
+											"trigger":"polarity less than 0.75",
+											"ruleset_id":"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac"
+										},
+										{
+											"alert_id":"6f79d2e8-aae0-4ca1-843a-390dce98bfaa",
+											"user_id":"171154445",
+											"user_name":"senojus",
+											"user_location":"Flintshire",
+											"text":"RT @RichardBurgon: I have secured a debate in Parliament next week on the future of our NHS.\n\nI will be demanding:\n\n▪️an end to the creepin…",
+											"created":"2021-09-20T13:38:48",
+											"polarity":0,
+											"subjectivity":0.06,
+											"posneg":"positive",
+											"found_word":"",
+											"trigger":"polarity less than 0.75",
+											"ruleset_id":"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac"
+										}]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/users/page":{
+			"get":{
+				"tags":["Get Users Paged"],
+				"summary":"Get Users Paged",
+				"operationId":"get_users_paged_api_clickhouse_users_page_get",
+				"parameters":[{
+					"required":false,
+					"schema":{
+						"title":"Num",
+						"type":"integer",
+						"default":1
+					},
+					"name":"num",
+					"in":"query"
+				},
+				{
+					"required":false,
+					"schema":{
+						"title":"Size",
+						"type":"integer",
+						"default":10
+					},
+					"name":"size",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[{
+											"user_id":"57306714",
+											"user_name":"UHP_NHS",
+											"max_id":1458091330652024800,
+											"created":"2021-11-08T10:04:50"
+										},
+										{
+											"user_id":"276442577",
+											"user_name":"StarterPat",
+											"max_id":1458094062595186700,
+											"created":"2021-11-08T15:03:58"
+										}]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/users/count":{
+			"get":{
+				"tags":["Get User Count"],
+				"summary":"Get User Count",
+				"operationId":"get_user_count_api_clickhouse_users_count_get",
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[137]
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/users/message/count/{user_id}/{social_media_source}":{
+			"get":{
+				"tags":["Get User Message Count"],
+				"summary":"Get User Message Count",
+				"operationId":"get_user_message_count_api_clickhouse_users_message_count__user_id___social_media_source__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"User Id",
+						"type":"string"
+					},
+					"name":"user_id",
+					"in":"path"
+				},
+				{
+					"required":true,
+					"schema":{
+						"title":"Social Media Source",
+						"type":"string"
+					},
+					"name":"social_media_source",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":[137]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/tables":{
+			"get":{
+				"tags":["Get Tables"],
+				"summary":"Get Tables",
+				"operationId":"get_tables_api_clickhouse_tables_get",
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/clickhouse/tables/columns/{table_name}":{
+			"get":{
+				"tags":["Get Columns"],
+				"summary":"Get Columns",
+				"operationId":"get_columns_api_clickhouse_tables_columns__table_name__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Table Name",
+						"type":"string"
+					},
+					"name":"table_name",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/docker/ruleset/up":{
+			"get":{
+				"tags":["Docker Compose Up"],
+				"summary":"Docker Compose Up",
+				"operationId":"docker_compose_up_api_docker_ruleset_up_get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Rulesetid",
+						"type":"string"
+					},
+					"name":"rulesetId",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/docker/ruleset/down":{
+			"get":{
+				"tags":["Docker Compose Down"],
+				"summary":"Docker Compose Down",
+				"operationId":"docker_compose_down_api_docker_ruleset_down_get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Rulesetid",
+						"type":"string"
+					},
+					"name":"rulesetId",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/docker/ruleset/stop":{
+			"get":{
+				"tags":["Docker Compose Stop"],
+				"summary":"Docker Compose Stop",
+				"operationId":"docker_compose_stop_api_docker_ruleset_stop_get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Rulesetid",
+						"type":"string"
+					},
+					"name":"rulesetId",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/docker/query/up":{
+			"get":{
+				"tags":["Docker Compose Up"],
+				"summary":"Docker Compose Query Up",
+				"operationId":"docker_compose_query_up_api_docker_query_up_get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Queryid",
+						"type":"string"
+					},
+					"name":"queryId",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/docker/query/down":{
+			"get":{
+				"tags":["Docker Compose Down"],
+				"summary":"Docker Compose Query Down",
+				"operationId":"docker_compose_query_down_api_docker_query_down_get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Queryid",
+						"type":"string"
+					},
+					"name":"queryId",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/docker/query/stop":{
+			"get":{
+				"tags":["Docker Compose Stop"],
+				"summary":"Docker Compose Query Stop",
+				"operationId":"docker_compose_query_stop_api_docker_query_stop_get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Queryid",
+						"type":"string"
+					},
+					"name":"queryId",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/kafka/send":{
+			"post":{
+				"tags":["Send Messages to Topic"],
+				"summary":"Send Messages To Topic",
+				"operationId":"send_messages_to_topic_api_kafka_send_post",
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/kafka/retrieve":{
+			"get":{
+				"tags":["Retrieve Messages from Topic"],
+				"summary":"Retrieve Messages From Topic",
+				"operationId":"Retrieve_messages_from_topic_api_kafka_retrieve_get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Topic Name",
+						"type":"string"
+					},
+					"name":"topic_name",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/query/post":{
+			"post":{
+				"tags":["Execute Query"],
+				"summary":"Execute Query",
+				"operationId":"execute_query_api_query_post_post",
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/query/conditions/{queryName}":{
+			"get":{
+				"tags":["Get Conditions of Query"],
+				"summary":"Get Conditions Of Query",
+				"operationId":"get_conditions_of_query_api_query_conditions__queryName__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Queryname",
+						"type":"string"
+					},
+					"name":"queryName",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/query/create/{queryName}":{
+			"post":{
+				"tags":["Create Query Files"],
+				"summary":"Create Query",
+				"operationId":"create_query_api_query_create__queryName__post",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Queryname",
+						"type":"string"
+					},
+					"name":"queryName",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/query/edit/{queryId}":{
+			"post":{
+				"tags":["Edit Query Files"],
+				"summary":"Edit Query",
+				"operationId":"edit_query_api_query_edit__queryId__post",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Queryid",
+						"type":"string"
+					},
+					"name":"queryId",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/query/list":{
+			"get":{
+				"tags":["Get Queries"],
+				"summary":"Get Queries",
+				"operationId":"get_queries_api_query_list_get",
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/query/get/{queryId}":{
+			"get":{
+				"tags":["Get Query"],
+				"summary":"Get Query",
+				"operationId":"get_query_api_query_get__queryId__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Queryid",
+						"type":"string"
+					},
+					"name":"queryId",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/query/conditions/{queryId}":{
+			"get":{
+				"tags":["Get Conditions"],
+				"summary":"Get Conditions",
+				"operationId":"get_conditions_api_query_conditions__queryId__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Queryid",
+						"type":"string"
+					},
+					"name":"queryId",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/query/compose/create":{
+			"get":{
+				"tags":["Generate Docker Compose File"],
+				"summary":"Generate Docker Compose Query",
+				"operationId":"generate_docker_compose_query_api_query_compose_create_get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Queryid",
+						"type":"string"
+					},
+					"name":"queryId",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/ruleset/containers/{rulesetId}":{
+			"get":{
+				"tags":["Container List by Ruleset"],
+				"summary":"Container List By Ruleset",
+				"operationId":"container_list_by_ruleset_api_ruleset_containers__rulesetId__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Rulesetid",
+						"type":"string"
+					},
+					"name":"rulesetId",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":["[\"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac-python-sentiment\", \"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac-python-twitter\", \"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac-python-flatten-json\", \"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac-python-alert\", \"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac-python-cep-2\", \"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac-python-cep-1\"]"]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/ruleset/containers":{
+			"get":{
+				"tags":["Container List"],
+				"summary":"Container List",
+				"operationId":"container_list_api_ruleset_containers_get",
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":["[\"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac-python-sentiment\", \"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac-python-twitter\", \"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac-python-flatten-json\", \"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac-python-alert\", \"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac-python-cep-2\", \"b68f0876-1bf9-4926-8ea2-6d3ef97fc1ac-python-cep-1\"]"]
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/ruleset/compose/create/{rulesetId}":{
+			"get":{
+				"tags":["Generate Docker Compose File"],
+				"summary":"Generate Docker Compose",
+				"operationId":"generate_docker_compose_api_ruleset_compose_create__rulesetId__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Rulesetid",
+						"type":"string"
+					},
+					"name":"rulesetId",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/ruleset/create/{rulesetName}":{
+			"post":{
+				"tags":["Create Ruleset"],
+				"summary":"Create Ruleset",
+				"operationId":"create_ruleset_api_ruleset_create__rulesetName__post",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Rulesetname",
+						"type":"string"
+					},
+					"name":"rulesetName",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/ruleset/edit/{rulesetId}":{
+			"post":{
+				"tags":["Edit Ruleset"],
+				"summary":"Edit Ruleset",
+				"operationId":"edit_ruleset_api_ruleset_edit__rulesetId__post",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Rulesetid",
+						"type":"string"
+					},
+					"name":"rulesetId",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/ruleset/delete/{rulesetId}":{
+			"delete":{
+				"tags":["Delete Ruleset"],
+				"summary":"Delete Ruleset",
+				"operationId":"delete_ruleset_api_ruleset_delete__rulesetId__delete",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Rulesetid",
+						"type":"string"
+					},
+					"name":"rulesetId",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/ruleset/list":{
+			"get":{
+				"tags":["Get Rulesets"],
+				"summary":"Get Rulesets",
+				"operationId":"get_rulesets_api_ruleset_list_get",
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":{
+											"rulesetName":"ruleset4",
+											"description":"",
+											"social_media_source":"Twitter",
+											"created":"2021-09-20T09:48:22.371Z",
+											"query":"nhs",
+											"lang":"en",
+											"rulesetId":"e3d6eb19-506c-40e4-a780-592e7dc2007b"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/ruleset/single/{rulesetId}":{
+			"get":{
+				"tags":["Get Ruleset"],
+				"summary":"Get Ruleset",
+				"operationId":"get_ruleset_api_ruleset_single__rulesetId__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Rulesetid",
+						"type":"string"
+					},
+					"name":"rulesetId",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":{
+											"rulesetName":"ruleset4",
+											"description":"",
+											"social_media_source":"Twitter",
+											"created":"2021-09-20T09:48:22.371Z",
+											"query":"nhs",
+											"lang":"en",
+											"rulesetId":"e3d6eb19-506c-40e4-a780-592e7dc2007b"
+										}
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/ruleset/rules/{rulesetId}/edit":{
+			"post":{
+				"tags":["Create Rules"],
+				"summary":"Create Rules",
+				"operationId":"create_rules_api_ruleset_rules__rulesetId__edit_post",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Rulesetid",
+						"type":"string"
+					},
+					"name":"rulesetId",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/ruleset/rules/{rulesetId}/get":{
+			"get":{
+				"tags":["Get Rules"],
+				"summary":"Get Rules",
+				"operationId":"get_rules_api_ruleset_rules__rulesetId__get_get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Rulesetid",
+						"type":"string"
+					},
+					"name":"rulesetId",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":{
+											"genericRules":[{
+												"comparator":"contains",
+												"comparator_field":"text",
+												"comparator_value":"match_list_1.txt"
+											},
+											{
+												"comparator":"contains",
+												"comparator_field":"text",
+												"comparator_value":"match_list_2.txt"
+											}],
+											"customRules":[]
+										}
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/test":{
+			"get":{
+				"summary":"Test",
+				"operationId":"test_test_get",
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/upload/getfiles/{projectId}/{file_num}":{
+			"get":{
+				"tags":["Get Keyword File"],
+				"summary":"Get Keyword File",
+				"operationId":"get_keyword_file_api_upload_getfiles__projectId___file_num__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Projectid",
+						"type":"string"
+					},
+					"name":"projectId",
+					"in":"path"
+				},
+				{
+					"required":true,
+					"schema":{
+						"title":"File Num",
+						"type":"string"
+					},
+					"name":"file_num",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Success",
+						"content":{
+							"application/json":{
+								"schema":{},
+								"examples":{
+									"success":{
+										"value":["care","recommend","iHELP","symptoms","pancreatic","health"]
+									}
+								}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/upload/updatefiles/{projectId}/{fileNum}":{
+			"post":{
+				"tags":["Update Files"],
+				"summary":"Update Files",
+				"operationId":"update_files_api_upload_updatefiles__projectId___fileNum__post",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Projectid",
+						"type":"string"
+					},
+					"name":"projectId",
+					"in":"path"
+				},
+				{
+					"required":true,
+					"schema":{
+						"title":"Filenum",
+						"type":"string"
+					},
+					"name":"fileNum",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/upload/superset/datasource/upload/{rulesetId}/{file_name}":{
+			"get":{
+				"summary":"Import Datasources",
+				"operationId":"import_datasources_api_upload_superset_datasource_upload__rulesetId___file_name__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Rulesetid"
+					},
+					"name":"rulesetId",
+					"in":"path"
+				},
+				{
+					"required":true,
+					"schema":{
+						"title":"File Name"
+					},
+					"name":"file_name",
+					"in":"path"
+				},
+				{
+					"required":false,
+					"schema":{
+						"title":"Isquery",
+						"type":"boolean",
+						"default":false
+					},
+					"name":"isQuery",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/upload/superset/datasource/export/{rulesetId}":{
+			"get":{
+				"summary":"Export Datasources",
+				"operationId":"export_datasources_api_upload_superset_datasource_export__rulesetId__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Rulesetid"
+					},
+					"name":"rulesetId",
+					"in":"path"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/upload/superset/dashboard/upload/{rulesetId}":{
+			"get":{
+				"summary":"Import Dashboards",
+				"operationId":"import_dashboards_api_upload_superset_dashboard_upload__rulesetId__get",
+				"parameters":[{
+					"required":true,
+					"schema":{
+						"title":"Rulesetid",
+						"type":"string"
+					},
+					"name":"rulesetId",
+					"in":"path"
+				},
+				{
+					"required":false,
+					"schema":{
+						"title":"Isquery",
+						"type":"boolean",
+						"default":false
+					},
+					"name":"isQuery",
+					"in":"query"
+				}],
+				"responses":{
+					"200":{
+						"description":"Successful Response",
+						"content":{
+							"application/json":{
+								"schema":{}
+							}
+						}
+					},
+					"422":{
+						"description":"Validation Error",
+						"content":{
+							"application/json":{
+								"schema":{
+									"$ref":"#/components/schemas/HTTPValidationError"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components":{
+		"schemas":{
+			"HTTPValidationError":{
+				"title":"HTTPValidationError",
+				"type":"object",
+				"properties":{
+					"detail":{
+						"title":"Detail",
+						"type":"array",
+						"items":{
+							"$ref":"#/components/schemas/ValidationError"
+						}
+					}
+				}
+			},
+			"ValidationError":{
+				"title":"ValidationError",
+				"required":["loc","msg","type"],
+				"type":"object",
+				"properties":{
+					"loc":{
+						"title":"Location",
+						"type":"array",
+						"items":{
+							"anyOf":[{
+								"type":"string"
+							},
+							{
+								"type":"integer"
+							}]
+						}
+					},
+					"msg":{
+						"title":"Message",
+						"type":"string"
+					},
+					"type":{
+						"title":"Error Type",
+						"type":"string"
+					}
+				}
+			}
+		}
+	},
+	"tags":[{
+		"name":"Get Alerts by Ruleset",
+		"description":"Returns all of the alerts from the Clickhouse table ‘alert_topic’ appended to the ruleset ID specified by the ruleset_id parameter."
+	},
+	{
+		"name":"Get Alerts by Ruleset Paged",
+		"description":"Returns all of the alerts from the Clickhouse table ‘alert_topic’ appended to the ruleset ID specified by the ruleset_id parameter. The num parameter is used for the page number to determine the offset and the size parameter is how many alerts are retrieved from the table."
+	},
+	{
+		"name":"Get Alert Count by Ruleset ID",
+		"description":"Returns all of the alerts from the Clickhouse table ‘alert_topic’ appended to the ruleset ID specified by the ruleset_id parameter"
+	},
+	{
+		"name":"Get Alert by Alert ID",
+		"description":"Returns a specific Alert based on the Alert ID"
+	},
+	{
+		"name":"Get Events by Ruleset",
+		"description":"Returns all of the events from the Clickhouse table ‘event_topic’ appended to the ruleset ID specified by the ruleset_id parameter."
+	},
+	{
+		"name":"Get Events by Ruleset Paged",
+		"description":"Returns all of the events from the Clickhouse table ‘event_topic’ appended to the ruleset ID specified by the ruleset_id parameter. The num parameter is used for the page number to determine the offset and the size parameter is how many alerts are retrieved from the table."
+	},
+	{
+		"name":"Get Events from Ruleset by Alert ID",
+		"description":"Returns the alert from the Clickhouse table ‘event_topic’ appended to the ruleset ID specified by the ruleset_id parameter.  filtered by the alert_id specified by the alert_id parameter"
+	},
+	{
+		"name":"Get Events from Ruleset by User",
+		"description":"Returns all of the events from the Clickhouse table ‘event_topic’ filtered by the user id specified by the user_id parameter"
+	},
+	{
+		"name":"Get Users",
+		"description":"Returns the User ID, User Name, Social Media Source and Max ID of all of the accounts that are currently being followed"
+	},
+	{
+		"name":"Get Users by Social Media",
+		"description":"Returns the User ID, User Name, Social Media Source and Max ID of all of the accounts that are currently being followed by Social Media"
+	},
+	{
+		"name":"Get User by ID",
+		"description":"Returns the User ID, User Name, Social Media Source and Max ID of a specific tracked account based on User ID"
+	},
+	{
+		"name":"Insert User",
+		"description":"Inserts the User ID, User Name, Social Media Source and Max ID of an account to follow that user"
+	},
+	{
+		"name":"Delete User",
+		"description":"Deletes the tracked account from the table based on their User ID and Social Media Source"
+	},
+	{
+		"name":"Update Max ID of User",
+		"description":"Updates the Max ID field of a User based on their User ID. The Max ID is used to get the latest tweet received from the user"
+	},
+	{
+		"name":"Get User Message by ID",
+		"description":"Gets all of the User messages based on the User ID and the Social Media Source"
+	},
+	{
+		"name":"Get Users Paged",
+		"description":"Returns the User ID, User Name and Max ID of all of the accounts that are currently being followed. This gets a limited amount of the Users based on parameters"
+	},
+	{
+		"name":"Get User Count",
+		"description":"Returns the amount of Users in an array"
+	},
+	{
+		"name":"Get User Message Count",
+		"description":"Returns the amount of Messages from a specific User and the Social Media Source"
+	},
+	{
+		"name":"Send Messages to Topic",
+		"description":"Sends all of the messages in the request message in the 'messages' key to the topic specified in the value of 'topic_name'."
+	},
+	{
+		"name":"Execute Query",
+		"description":"Executes a query based on the conditions passed in the response body."
+	},
+	{
+		"name":"Container List",
+		"description":"List all of the containers that are running in Docker"
+	},
+	{
+		"name":"Container List by Ruleset",
+		"description":"List all of the containers that are running in Docker filtered by an ruleset ID"
+	},
+	{
+		"name":"Generate Docker Compose File",
+		"description":"Generates a docker-compose.yml file based on the details and rules specified for the ruleset"
+	},
+	{
+		"name":"Create Ruleset",
+		"description":"Creates the folders needed to store information about an ruleset and generates an ID for the ruleset"
+	},
+	{
+		"name":"Edit Ruleset",
+		"description":"Creates a details.json file which contains the details for the ruleset"
+	},
+	{
+		"name":"Delete Ruleset",
+		"description":"Deletes an ruleset based on the ruleset ID passed as a parameter"
+	},
+	{
+		"name":"Get Rulesets",
+		"description":"Prints details about every ruleset created"
+	},
+	{
+		"name":"Get Ruleset",
+		"description":"Prints details about a single ruleset specified by the rulesetId parameter"
+	},
+	{
+		"name":"Create Rules",
+		"description":"Creates a rules.json file using the request body as its contents"
+	},
+	{
+		"name":"Get Rules",
+		"description":"Gets the data from the rules.json file of a specified ruleset and outputs it as JSON"
+	},
+	{
+		"name":"Get Keyword File",
+		"description":"Gets the words from the keywords list indicated by the projectId and the list number (file_num) and outputs it as a JSON array"
+	},
+	{
+		"name":"Update Files",
+		"description":"Sends the list of words to the API and puts then into a keywords list file based on the projectId and the file_num"
+	}]
+}
