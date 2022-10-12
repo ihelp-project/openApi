@@ -1,0 +1,170 @@
+{
+    "openapi": "3.0.1",
+    "info": { "title": "impact-evaluator", "version": "0.0.2" },
+    "servers": [
+        { "url": "http://localhost:8080", "description": "Generated server url" }
+    ],
+    "tags": [{ "name": "Impact Evaluator" }],
+    "paths": {
+        "/impact-evaluator/report": {
+            "post": {
+                "tags": ["Impact Evaluator"],
+                "summary": "The report and the Impact of the messages for the clusters of patients",
+                "operationId": "getReport",
+                "parameters": [{
+                        "name": "startDateTime",
+                        "in": "query",
+                        "required": true,
+                        "schema": { "type": "string", "format": "date-time" }
+                    },
+                    {
+                        "name": "endlDateTime",
+                        "in": "query",
+                        "required": true,
+                        "schema": { "type": "string", "format": "date-time" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/Report" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/impact-evaluator/patientstats": {
+            "post": {
+                "tags": ["Impact Evaluator"],
+                "summary": "The set of messages and related measurements per user",
+                "operationId": "getPatientStats",
+                "parameters": [{
+                        "name": "ihelpid",
+                        "in": "query",
+                        "required": true,
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "startDateTime",
+                        "in": "query",
+                        "required": true,
+                        "schema": { "type": "string", "format": "date-time" }
+                    },
+                    {
+                        "name": "endlDateTime",
+                        "in": "query",
+                        "required": true,
+                        "schema": { "type": "string", "format": "date-time" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": { "$ref": "#/components/schemas/PatientStats" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/impact-evaluator/messagesstats": {
+            "post": {
+                "tags": ["Impact Evaluator"],
+                "summary": "The set of all messages produced by the system",
+                "operationId": "getMessagesStats",
+                "parameters": [{
+                        "name": "startDateTime",
+                        "in": "query",
+                        "required": true,
+                        "schema": { "type": "string", "format": "date-time" }
+                    },
+                    {
+                        "name": "endlDateTime",
+                        "in": "query",
+                        "required": true,
+                        "schema": { "type": "string", "format": "date-time" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "$ref": "#/components/schemas/Message" }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Cluster": {
+                "type": "object",
+                "properties": {
+                    "msgCategory": { "type": "string" },
+                    "sentMsgs": { "type": "integer", "format": "int32" },
+                    "minAge": { "type": "integer", "format": "int32" },
+                    "maxAge": { "type": "integer", "format": "int32" },
+                    "msgType": { "type": "string" },
+                    "avgImpact": { "type": "number", "format": "float" }
+                }
+            },
+            "Report": {
+                "type": "object",
+                "properties": {
+                    "clusters": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/Cluster" }
+                    },
+                    "startDateTime": { "type": "string", "format": "date-time" },
+                    "endDateTime": { "type": "string", "format": "date-time" }
+                }
+            },
+            "DataPoint": {
+                "type": "object",
+                "properties": {
+                    "value": { "type": "number", "format": "float" },
+                    "code": { "type": "string" },
+                    "time": { "type": "string", "format": "date-time" }
+                }
+            },
+            "Message": {
+                "type": "object",
+                "properties": {
+                    "patientId": { "type": "string" },
+                    "gender": { "type": "string" },
+                    "age": { "type": "integer", "format": "int32" },
+                    "status": { "type": "string" },
+                    "category": { "type": "string" },
+                    "dimension": { "type": "string" },
+                    "sent": { "type": "string", "format": "date-time" },
+                    "rcvd": { "type": "string", "format": "date-time" },
+                    "content": { "type": "string" }
+                }
+            },
+            "PatientStats": {
+                "type": "object",
+                "properties": {
+                    "dataOfInterest": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/DataPoint" }
+                    },
+                    "sentMessages": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/Message" }
+                    }
+                }
+            }
+        }
+    }
+}
