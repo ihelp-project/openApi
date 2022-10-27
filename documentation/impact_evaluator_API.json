@@ -1,6 +1,6 @@
 {
     "openapi": "3.0.1",
-    "info": { "title": "impact-evaluator", "version": "0.0.2" },
+    "info": { "title": "impact-evaluator", "version": "0.0.6" },
     "servers": [
         { "url": "http://localhost:8080", "description": "Generated server url" }
     ],
@@ -18,10 +18,28 @@
                         "schema": { "type": "string", "format": "date-time" }
                     },
                     {
-                        "name": "endlDateTime",
+                        "name": "endDateTime",
                         "in": "query",
                         "required": true,
                         "schema": { "type": "string", "format": "date-time" }
+                    },
+                    {
+                        "name": "genderAggr",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "type": "boolean" }
+                    },
+                    {
+                        "name": "ageAggr",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "type": "boolean" }
+                    },
+                    {
+                        "name": "riskAggr",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "type": "boolean" }
                     }
                 ],
                 "responses": {
@@ -54,7 +72,7 @@
                         "schema": { "type": "string", "format": "date-time" }
                     },
                     {
-                        "name": "endlDateTime",
+                        "name": "endDateTime",
                         "in": "query",
                         "required": true,
                         "schema": { "type": "string", "format": "date-time" }
@@ -84,7 +102,7 @@
                         "schema": { "type": "string", "format": "date-time" }
                     },
                     {
-                        "name": "endlDateTime",
+                        "name": "endDateTime",
                         "in": "query",
                         "required": true,
                         "schema": { "type": "string", "format": "date-time" }
@@ -111,12 +129,30 @@
             "Cluster": {
                 "type": "object",
                 "properties": {
-                    "msgCategory": { "type": "string" },
+                    "longLabel": { "type": "string" },
+                    "numerosity": { "type": "integer", "format": "int32" },
+                    "avgImpact": { "type": "number", "format": "double" },
                     "sentMsgs": { "type": "integer", "format": "int32" },
+                    "gender": { "type": "string" },
                     "minAge": { "type": "integer", "format": "int32" },
                     "maxAge": { "type": "integer", "format": "int32" },
+                    "minRisk": { "type": "integer", "format": "int32" },
+                    "maxRisk": { "type": "integer", "format": "int32" },
+                    "msgCategory": { "type": "string" },
                     "msgType": { "type": "string" },
-                    "avgImpact": { "type": "number", "format": "float" }
+                    "patients": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/Patient" }
+                    }
+                }
+            },
+            "Patient": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "string" },
+                    "age": { "type": "integer", "format": "int32" },
+                    "gender": { "type": "string" },
+                    "riskScore": { "type": "integer", "format": "int32" }
                 }
             },
             "Report": {
@@ -142,10 +178,8 @@
                 "type": "object",
                 "properties": {
                     "patientId": { "type": "string" },
-                    "gender": { "type": "string" },
-                    "age": { "type": "integer", "format": "int32" },
                     "status": { "type": "string" },
-                    "category": { "type": "string" },
+                    "type": { "type": "string" },
                     "dimension": { "type": "string" },
                     "sent": { "type": "string", "format": "date-time" },
                     "rcvd": { "type": "string", "format": "date-time" },
@@ -162,6 +196,10 @@
                     "sentMessages": {
                         "type": "array",
                         "items": { "$ref": "#/components/schemas/Message" }
+                    },
+                    "thresholds": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/DataPoint" }
                     }
                 }
             }
